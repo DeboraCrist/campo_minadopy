@@ -66,12 +66,19 @@ class CampoMinado:
                 if 0 <= x + dx < self.tamanho and 0 <= y + dy < self.tamanho and self.bombas[x + dx][y + dy]:
                     count += 1
         return count
+    
 
     def mostrar_bombas(self):
         for x in range(self.tamanho):
             for y in range(self.tamanho):
                 if self.bombas[x][y]:
                     self.tabuleiro[x][y] = '*'
+    
+    def revelar_bombas(self):
+        for x in range(self.tamanho):
+            for y in range(self.tamanho):
+                if self.bombas[x][y]:
+                    self.tabuleiro[x][y] = 'B'
 
     def venceu_jogo(self):
         for x in range(self.tamanho):
@@ -79,6 +86,18 @@ class CampoMinado:
                 if not self.bombas[x][y] and self.tabuleiro[x][y] == '-':
                     return False
         return True
+
+    def colocar_bandeira(self, x, y):
+        if not self.jogo_encerrado and not self.jogo_vencido:
+            # Check if the cell is valid and not already flagged
+            if 0 <= x < self.tamanho and 0 <= y < self.tamanho and self.tabuleiro[x][y] == '-':
+                self.tabuleiro[x][y] = 'F'  # Flagged
+
+    def remover_bandeira(self, x, y):
+        if not self.jogo_encerrado and not self.jogo_vencido:
+            # Check if the cell is valid and flagged
+            if 0 <= x < self.tamanho and 0 <= y < self.tamanho and self.tabuleiro[x][y] == 'F':
+                self.tabuleiro[x][y] = '-'  # Remove the flag   
 
     def reiniciar_jogo(self):
         self.inicializar_tabuleiro()

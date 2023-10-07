@@ -1,5 +1,7 @@
 import sys
 
+from campo_minado import CampoMinado
+
 def mostrar_tabuleiro(tabuleiro):
     print("Tabuleiro:")
     for linha in tabuleiro:
