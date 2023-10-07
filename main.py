@@ -1,43 +1,52 @@
-import sys
-
 from campo_minado import CampoMinado
-
-def mostrar_tabuleiro(tabuleiro):
-    print("Tabuleiro:")
-    for linha in tabuleiro:
-        for celula in linha:
-            print(celula, end=" ")
-        print()
 
 def main():
     print("Bem-vindo ao Campo Minado!")
-    tamanho = int(input("Informe o tamanho do tabuleiro: "))
-    num_bombas = int(input("Informe o número de bombas: "))
 
-    jogo = CampoMinado(tamanho, num_bombas)
-
-    while not jogo.jogo_encerrado:
-        mostrar_tabuleiro(jogo.tabuleiro)
-
-        linha = int(input("Digite a linha: "))
-        coluna = int(input("Digite a coluna: "))
-
-        acao = input("Escolha uma ação (D para descobrir, F para colocar bandeira, R para remover bandeira): ")
-
-        if acao.upper() == "D":
-            jogo.descobrir_zona(linha, coluna)
-        elif acao.upper() == "F":
-            jogo.colocar_bandeira(linha, coluna)
-        elif acao.upper() == "R":
-            jogo.remover_bandeira(linha, coluna)
+    while True:
+        nivel = input("Escolha o nível de dificuldade (1, 2 ou 3): ")
+        if nivel.isdigit() and int(nivel) in CampoMinado.NIVEIS:
+            nivel = int(nivel)
+            break
         else:
-            print("Ação inválida. Use D, F ou R.")
+            print("Nível de dificuldade inválido. Escolha 1, 2 ou 3.")
 
-    if jogo.jogo_encerrado and not jogo.is_descoberta(0, 0):
-        print("Você perdeu! Fim de jogo.")
-        mostrar_tabuleiro(jogo.tabuleiro)
-    else:
-        print("Parabéns! Você venceu!")
+    jogo = CampoMinado(nivel)
+
+    while True:
+        for row in jogo.tabuleiro:
+            print(" ".join(row))
+
+        acao = input("Escolha uma ação (D para descobrir, B para colocar bandeira, R para remover bandeira, Q para sair): ").upper()
+
+        if acao == 'Q':
+            print("Saindo do jogo.")
+            break
+        elif acao == 'D':
+            x = int(input("Digite a coordenada X: "))
+            y = int(input("Digite a coordenada Y: "))
+            jogo.descobrir_zona(x, y)
+            if jogo.jogo_encerrado:
+                print("Você perdeu!")
+                jogo.revelar_bombas()
+                for row in jogo.tabuleiro:
+                    print(" ".join(row))
+                break
+            elif jogo.jogo_vencido:
+                print("Parabéns! Você venceu!")
+                for row in jogo.tabuleiro:
+                    print(" ".join(row))
+                break
+        elif acao == 'B':
+            x = int(input("Digite a coordenada X para colocar a bandeira: "))
+            y = int(input("Digite a coordenada Y para colocar a bandeira: "))
+            jogo.colocar_bandeira(x, y)
+        elif acao == 'R':
+            x = int(input("Digite a coordenada X para remover a bandeira: "))
+            y = int(input("Digite a coordenada Y para remover a bandeira: "))
+            jogo.remover_bandeira(x, y)
+        else:
+            print("Ação inválida. Escolha D para descobrir, B para colocar bandeira, R para remover bandeira ou Q para sair.")
 
 if __name__ == "__main__":
     main()

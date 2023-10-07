@@ -39,14 +39,9 @@ class TestCampoMinado(unittest.TestCase):
         self.assertEqual(jogo.num_bombas, 100)
 
     def test_colocar_bombas(self):
-        # Crie uma instância do CampoMinado com um nível de dificuldade para teste
-        campo = CampoMinado(nivel=1)
-
-        # Obtenha a contagem de bombas no tabuleiro
-        bombas_colocadas = sum(sum(1 for bomba in linha if bomba) for linha in campo.bombas)
-
-        # Verifique se o número de bombas corresponde ao número esperado
-        self.assertEqual(bombas_colocadas, campo.num_bombas)
+        jogo = CampoMinado(1)
+        bombas_colocadas = sum(sum(1 for bomba in linha if bomba) for linha in jogo.bombas)
+        self.assertEqual(bombas_colocadas, jogo.num_bombas)
 
     def test_reiniciar_jogo(self):
         jogo = CampoMinado(1)
@@ -83,6 +78,10 @@ class TestCampoMinado(unittest.TestCase):
         jogo = CampoMinado(1)
         self.assertTrue(all(cell == '-' for row in jogo.tabuleiro for cell in row))
 
+    def mostrar_tabuleiro(self):
+        for row in self.tabuleiro:
+            print(" ".join(row))
+
     def test_colocar_bandeira(self):
         jogo = CampoMinado(1)
         jogo.colocar_bandeira(0, 0)
@@ -98,7 +97,6 @@ class TestCampoMinado(unittest.TestCase):
         jogo = CampoMinado(1)
         jogo.remover_bandeira(0, 0)
         self.assertEqual(jogo.tabuleiro[0][0], '-')
-
     
     def test_revelarBombas(self):
         jogo = CampoMinado(1)
@@ -199,14 +197,14 @@ class TestCampoMinado(unittest.TestCase):
         jogo = CampoMinado(1)
         bombas_colocadas = sum(row.count(True) for row in jogo.bombas)
         expected_bombas = jogo.num_bombas
-        error_margin = 2  # Acceptable error margin
+        error_margin = 2 
         self.assertLessEqual(abs(bombas_colocadas - expected_bombas), error_margin)
 
     def test_distribuicaoAleatoriaBombasNivelIntermediario(self):
         jogo = CampoMinado(2)
         bombas_colocadas = sum(row.count(True) for row in jogo.bombas)
         expected_bombas = jogo.num_bombas
-        error_margin = 2  # Acceptable error margin
+        error_margin = 2 
         self.assertLessEqual(abs(bombas_colocadas - expected_bombas), error_margin)
 
     
@@ -214,7 +212,7 @@ class TestCampoMinado(unittest.TestCase):
         jogo = CampoMinado(3)
         bombas_colocadas = sum(row.count(True) for row in jogo.bombas)
         expected_bombas = jogo.num_bombas
-        error_margin = 2  # Acceptable error margin
+        error_margin = 2  
         self.assertLessEqual(abs(bombas_colocadas - expected_bombas), error_margin)
 
     # def test_reiniciarJogoVencidocomDescoberta(self):
