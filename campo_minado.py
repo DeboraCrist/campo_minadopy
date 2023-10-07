@@ -32,9 +32,12 @@ class CampoMinado:
 
     def descobrir_zona(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
+            if self.tabuleiro[x][y] == 'F':
+                return
+
             if self.bombas[x][y]:
                 self.jogo_encerrado = True
-                self.mostrar_bombas()
+                self.revelar_bombas()
             else:
                 self.descobrir_vizinhanca(x, y)
                 if self.venceu_jogo():
@@ -74,9 +77,11 @@ class CampoMinado:
 
     def colocar_bandeira(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
-            if 0 <= x < self.tamanho and 0 <= y < self.tamanho and self.tabuleiro[x][y] == '-':
-                self.tabuleiro[x][y] = 'F'
-                self.bandeiras_colocadas += 1
+            if 0 <= x < self.tamanho and 0 <= y < self.tamanho:
+                if self.tabuleiro[x][y] == '-' or self.tabuleiro[x][y].isdigit():
+                    self.tabuleiro[x][y] = 'F'
+                    self.bandeiras_colocadas += 1
+
 
     def remover_bandeira(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
