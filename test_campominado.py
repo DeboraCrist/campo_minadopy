@@ -151,12 +151,6 @@ class TestCampoMinado(unittest.TestCase):
         jogo.descobrir_zona(0, 0)
         self.assertNotEqual(jogo.tabuleiro[0][0], '-')
 
-    # def test_impedirAcaoDeBandeiraEmZonaRevelada(self):
-    #     jogo = CampoMinado(1)
-    #     jogo.descobrir_zona(0, 0)
-    #     jogo.colocar_bandeira(0, 0)
-    #     self.assertEqual(jogo.tabuleiro[0][0], '-')
-
     def test_descobrirZona(self):
         jogo = CampoMinado(1)
         jogo.descobrir_zona(0, 0)
@@ -206,13 +200,13 @@ class TestCampoMinado(unittest.TestCase):
         error_margin = 2  
         self.assertLessEqual(abs(bombas_colocadas - expected_bombas), error_margin)
 
-    # def test_reiniciarJogoVencidocomDescoberta(self):
-    #     jogo = CampoMinado(1)
-    #     jogo.tabuleiro = [['-' for _ in range(jogo.tamanho)] for _ in range(jogo.tamanho)]
-    #     jogo.jogo_vencido = True
-    #     jogo.descobrir_zona(0, 0)
-    #     jogo.reiniciar_jogo()
-    #     self.assertEqual(jogo.jogo_vencido, True)
+    def test_reiniciarJogoVencidoComDescoberta(self):
+        jogo = CampoMinado(1)
+        jogo.tabuleiro = [['-' for _ in range(jogo.tamanho)] for _ in range(jogo.tamanho)]
+        jogo.jogo_vencido = True
+        jogo.descobrir_zona(0, 0)
+        jogo.reiniciar_jogo()
+        self.assertEqual(jogo.jogo_vencido, False)
 
     def test_NumeroDeBandeirasNaoExcedeTotalDeCelulas(self):
         jogo = CampoMinado(1)
@@ -220,14 +214,16 @@ class TestCampoMinado(unittest.TestCase):
         jogo.colocar_bandeira(0, 0)
         self.assertLessEqual(jogo.bandeiras_colocadas, total_celulas)
 
-    # def test_testColocarBandeirasIgualAoNumeroDeBombas(self):
-    #     jogo = CampoMinado(1)
-    #     total_bombas = jogo.num_bombas
-    #     for i in range(jogo.tamanho):
-    #         for j in range(jogo.tamanho):
-    #             if jogo.tabuleiro[i][j] == 'B':
-    #                 jogo.colocar_bandeira(i, j)
-    #     self.assertEqual(jogo.bandeiras_colocadas, total_bombas)
+    def test_colocar_bandeiras_igual_numero_de_bombas(self):
+        self.campo_minado = CampoMinado(1)
+        # Coloque bandeiras em todas as bombas
+        for x in range(self.campo_minado.tamanho):
+            for y in range(self.campo_minado.tamanho):
+                if self.campo_minado.bombas[x][y]:
+                    self.campo_minado.colocar_bandeira(x, y)
+
+        # Verifique se o jogo foi vencido
+        self.assertTrue(self.campo_minado.jogo_vencido)
 
     def test_JogoNaoEstaEmEstadoInicial(self):
         jogo = CampoMinado(1)
@@ -252,6 +248,14 @@ class TestCampoMinado(unittest.TestCase):
         jogo.descobrir_zona(0, 0)
         jogo.colocar_bandeira(1, 1)
         self.assertNotEqual(jogo.tabuleiro[1][1], 'B')
+
+    def test_colocarBandeiraEmZonaRevelada(self):
+        jogo = CampoMinado(1)
+        jogo.tabuleiro = [['-' for _ in range(jogo.tamanho)] for _ in range(jogo.tamanho)]
+        jogo.descobrir_zona(0, 0)  # Simula a revelação de uma zona
+        jogo.colocar_bandeira(0, 0)
+        self.assertEqual(jogo.tabuleiro[0][0], ' ') 
+
 
 
 if __name__ == '__main__':

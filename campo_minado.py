@@ -78,9 +78,22 @@ class CampoMinado:
     def colocar_bandeira(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
             if 0 <= x < self.tamanho and 0 <= y < self.tamanho:
-                if self.tabuleiro[x][y] == '-' or self.tabuleiro[x][y].isdigit():
+                if self.tabuleiro[x][y] == '-':
                     self.tabuleiro[x][y] = 'F'
                     self.bandeiras_colocadas += 1
+
+                    if self.bandeiras_colocadas == self.num_bombas:
+                        self.verificar_vitoria()
+
+
+
+    def verificar_vitoria(self):
+        if self.bandeiras_colocadas == self.num_bombas:
+            for x in range(self.tamanho):
+                for y in range(self.tamanho):
+                    if self.bombas[x][y] and self.tabuleiro[x][y] != 'F':
+                        return
+            self.jogo_vencido = True
 
 
     def remover_bandeira(self, x, y):
