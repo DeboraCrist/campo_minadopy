@@ -85,8 +85,6 @@ class CampoMinado:
                     if self.bandeiras_colocadas == self.num_bombas:
                         self.verificar_vitoria()
 
-
-
     def verificar_vitoria(self):
         if self.bandeiras_colocadas == self.num_bombas:
             for x in range(self.tamanho):
@@ -94,7 +92,6 @@ class CampoMinado:
                     if self.bombas[x][y] and self.tabuleiro[x][y] != 'F':
                         return
             self.jogo_vencido = True
-
 
     def remover_bandeira(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
