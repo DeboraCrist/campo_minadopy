@@ -1,5 +1,7 @@
 import unittest
 from campo_minado import CampoMinado
+from unittest.mock import patch
+from io import StringIO
 
 class TestCampoMinado(unittest.TestCase):
 
@@ -121,12 +123,43 @@ class TestCampoMinado(unittest.TestCase):
         self.jogo.colocar_bandeira(0, 0)
         self.jogo.reiniciar_jogo()
         self.assertTrue(all(cell == '-' for row in self.jogo.tabuleiro for cell in row))
+
+    def test_ReiniciarJogoNivel2(self):
+        jogo = CampoMinado(2)
+        jogo.colocar_bandeira(0, 0)
+        jogo.reiniciar_jogo()
+        self.assertTrue(all(cell == '-' for row in jogo.tabuleiro for cell in row))
+    
+    def test_ReiniciarJogonivel3(self):
+        jogo = CampoMinado(3)
+        jogo.colocar_bandeira(0, 0)
+        jogo.reiniciar_jogo()
+        self.assertTrue(all(cell == '-' for row in jogo.tabuleiro for cell in row))
     
     def test_ReiniciarJogoEmMeioAoJogo(self):
         self.jogo.colocar_bandeira(0, 0)
         self.jogo.descobrir_zona(1, 1)
         self.jogo.reiniciar_jogo()
         self.assertTrue(all(cell == '-' for row in self.jogo.tabuleiro for cell in row))
+
+    def test_bandeira_em_zona_revelada(self):
+        self.jogo.descobrir_zona(0, 0)
+        self.jogo.colocar_bandeira(0, 0)
+        self.assertNotEqual(self.jogo.tabuleiro[0][0], 'F')  
+ 
+    def test_bandeira_em_zona_revelada(self):
+        self.jogo.descobrir_zona(0, 0)
+
+        #  um objeto StringIO para capturar a saída padrão
+        output_buffer = StringIO()
+
+        # Redireciona a saída padrão para o objeto de captura
+        with patch('sys.stdout', new=output_buffer):
+            self.jogo.colocar_bandeira(0, 0)
+
+        # Obtenha a saída capturada como uma string
+        output_text = output_buffer.getvalue()
+        self.assertIn("Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.", output_text)
 
 if __name__ == '__main__':
     unittest.main()

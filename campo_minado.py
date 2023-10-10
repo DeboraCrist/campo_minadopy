@@ -84,6 +84,8 @@ class CampoMinado:
 
                     if self.bandeiras_colocadas == self.num_bombas:
                         self.verificar_vitoria()
+                else:
+                    print("Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.")
 
     def verificar_vitoria(self):
         if self.bandeiras_colocadas == self.num_bombas:

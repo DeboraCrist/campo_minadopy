@@ -44,7 +44,10 @@ def main():
             elif acao == 'B':
                 x = int(input("Digite a coordenada X para colocar a bandeira: "))
                 y = int(input("Digite a coordenada Y para colocar a bandeira: "))
-                jogo.colocar_bandeira(x, y)
+                try:
+                    jogo.colocar_bandeira(x, y)
+                except ValueError as e:
+                    print(e) 
             elif acao == 'R':
                 x = int(input("Digite a coordenada X para remover a bandeira: "))
                 y = int(input("Digite a coordenada Y para remover a bandeira: "))
