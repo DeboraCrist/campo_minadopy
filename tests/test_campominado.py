@@ -2,8 +2,6 @@ import unittest
 from campo_minado import CampoMinado
 from unittest.mock import patch
 from io import StringIO
-from sys import exit
-
 
 class TestCampoMinado(unittest.TestCase):
 
@@ -45,10 +43,6 @@ class TestCampoMinado(unittest.TestCase):
 
     def test_tabuleiroInicializadoComHifens(self):
         self.assertTrue(all(cell == '-' for row in self.jogo.tabuleiro for cell in row))
-
-    def mostrar_tabuleiro(self):
-        for row in self.tabuleiro:
-            print(" ".join(row))
 
     def test_colocar_bandeira(self):
         self.jogo.colocar_bandeira(0, 0)
@@ -176,6 +170,21 @@ class TestCampoMinado(unittest.TestCase):
             self.jogo.sair()
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Saindo do jogo.")
+
+    def test_colocar_mais_bandeiras_do_que_bombas_print(self):
+        # Certifique-se de que o número de bandeiras colocadas seja igual ao número de bombas permitido
+        self.jogo.bandeiras_colocadas = self.jogo.num_bombas
+
+        # Um objeto StringIO para capturar a saída padrão
+        output_buffer = StringIO()
+
+        # Redireciona a saída padrão para o objeto de captura
+        with patch('sys.stdout', new=output_buffer):
+            self.jogo.colocar_bandeira(0, 0)
+
+        # Obtenha a saída capturada como uma string
+        output_text = output_buffer.getvalue()
+        self.assertIn("Ação inválida. Você não pode colocar mais bandeiras do que o número de bombas.", output_text)
     
     def test_colocar_bandeiras_menos_que_numero_de_bombas(self):
         self.jogo.inicializar_tabuleiro()
@@ -186,5 +195,15 @@ class TestCampoMinado(unittest.TestCase):
                     self.jogo.colocar_bandeira(x, y)
         self.assertEqual(self.jogo.bandeiras_colocadas, 8) 
     
+    def test_colocar_bandeiras_mais_que_numero_de_bombas(self):
+        self.jogo.inicializar_tabuleiro()
+        self.jogo.num_bombas = 11
+        for x in range(self.jogo.tamanho):
+            for y in range(self.jogo.tamanho):
+                if self.jogo.bombas[x][y]:
+                    self.jogo.colocar_bandeira(x, y)
+        self.assertEqual(self.jogo.bandeiras_colocadas, 10) 
+    
+  
 if __name__ == '__main__':
     unittest.main()

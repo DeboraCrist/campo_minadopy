@@ -36,7 +36,7 @@ class TestCampoMinado(unittest.TestCase):
         self.jogo.descobrir_zona(0, 0)
         self.assertEqual(self.jogo.jogo_vencido, False)
     
-    def test_distribuicao_aleatoria_bombas_nivel_facil(self):
+    def test_distribuicao_aleatoria_bombas_nivel_1(self):
         bombas_encontradas_em_execucoes = []
 
         # Execute o método colocar_bombas várias vezes e armazene as coordenadas das bombas
@@ -49,7 +49,7 @@ class TestCampoMinado(unittest.TestCase):
         for i in range(len(bombas_encontradas_em_execucoes) - 1):
             self.assertNotEqual(bombas_encontradas_em_execucoes[i], bombas_encontradas_em_execucoes[i + 1])
     
-    def test_distribuicao_aleatoria_bombas_nivel_facil(self):
+    def test_distribuicao_aleatoria_bombas_nivel_2(self):
         jogo = CampoMinado(2)
         bombas_encontradas_em_execucoes = []
         for _ in range(10):  
@@ -60,7 +60,7 @@ class TestCampoMinado(unittest.TestCase):
         for i in range(len(bombas_encontradas_em_execucoes) - 1):
             self.assertNotEqual(bombas_encontradas_em_execucoes[i], bombas_encontradas_em_execucoes[i + 1])
 
-    def test_distribuicao_aleatoria_bombas_nivel_facil(self):
+    def test_distribuicao_aleatoria_bombas_nivel_3(self):
         jogo = CampoMinado(3)
         bombas_encontradas_em_execucoes = []
         for _ in range(10):  

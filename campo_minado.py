@@ -96,7 +96,7 @@ class CampoMinado:
                     print("Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.")
             else:
                 print("Posição fora do tabuleiro.")
-
+        
 
     def verificar_vitoria(self):
         if self.bandeiras_colocadas == self.num_bombas:
