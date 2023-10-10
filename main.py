@@ -1,3 +1,4 @@
+from sys import exit
 import sys
 from campo_minado import CampoMinado
 
@@ -23,7 +24,7 @@ def main():
 
             if acao == 'Q':
                 jogo.sair()
-                sys.exit(0)
+                raise SystemExit
             elif acao == 'N':
                 print("Reiniciando o jogo.")
                 break  

@@ -2,6 +2,8 @@ import unittest
 from campo_minado import CampoMinado
 from unittest.mock import patch
 from io import StringIO
+from sys import exit
+
 
 class TestCampoMinado(unittest.TestCase):
 
@@ -147,7 +149,7 @@ class TestCampoMinado(unittest.TestCase):
         self.jogo.colocar_bandeira(0, 0)
         self.assertNotEqual(self.jogo.tabuleiro[0][0], 'F')  
  
-    def test_bandeira_em_zona_revelada(self):
+    def test_bandeira_em_zona_reveladaprint(self):
         self.jogo.descobrir_zona(0, 0)
 
         #  um objeto StringIO para capturar a saída padrão
@@ -161,7 +163,7 @@ class TestCampoMinado(unittest.TestCase):
         output_text = output_buffer.getvalue()
         self.assertIn("Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.", output_text)
 
-    def test_descobrir_zona_com_bandeira(self):
+    def test_descobrir_zona_com_bandeira_print(self):
         self.jogo.colocar_bandeira(0, 0)
         output_buffer = StringIO()
         with patch('sys.stdout', new=output_buffer):
@@ -169,11 +171,20 @@ class TestCampoMinado(unittest.TestCase):
         output_text = output_buffer.getvalue()
         self.assertIn("Ação inválida. Você deve remover a bandeira antes de descobrir a zona.", output_text)
 
-    def test_sair(self):
-        with patch("builtins.print") as mock_print:
+    def test_sair_print(self):
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             self.jogo.sair()
-            mock_print.assert_called_once_with("Saindo do jogo.")
-
-        
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Saindo do jogo.")
+    
+    def test_colocar_bandeiras_menos_que_numero_de_bombas(self):
+        self.jogo.inicializar_tabuleiro()
+        self.jogo.num_bombas = 8
+        for x in range(self.jogo.tamanho):
+            for y in range(self.jogo.tamanho):
+                if self.jogo.bombas[x][y]:
+                    self.jogo.colocar_bandeira(x, y)
+        self.assertEqual(self.jogo.bandeiras_colocadas, 8) 
+    
 if __name__ == '__main__':
     unittest.main()

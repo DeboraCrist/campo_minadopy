@@ -79,14 +79,24 @@ class CampoMinado:
     def colocar_bandeira(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
             if 0 <= x < self.tamanho and 0 <= y < self.tamanho:
-                if self.tabuleiro[x][y] == '-':
+                if self.tabuleiro[x][y] == '-' and self.bandeiras_colocadas < self.num_bombas:
                     self.tabuleiro[x][y] = 'F'
                     self.bandeiras_colocadas += 1
 
                     if self.bandeiras_colocadas == self.num_bombas:
                         self.verificar_vitoria()
+                elif self.bandeiras_colocadas == self.num_bombas:
+                    print("Ação inválida. Você não pode colocar mais bandeiras do que o número de bombas.")
+                elif self.tabuleiro[x][y] == 'F':
+                    self.tabuleiro[x][y] = '-'
+                    self.bandeiras_colocadas -= 1
+                elif self.tabuleiro[x][y] == 'B':
+                    print("Ação inválida. Você não pode colocar uma bandeira em uma bomba.")
                 else:
                     print("Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.")
+            else:
+                print("Posição fora do tabuleiro.")
+
 
     def verificar_vitoria(self):
         if self.bandeiras_colocadas == self.num_bombas:
@@ -117,4 +127,3 @@ class CampoMinado:
 
     def sair(self):
         print("Saindo do jogo.")
-
