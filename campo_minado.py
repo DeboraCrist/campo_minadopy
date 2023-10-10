@@ -33,6 +33,7 @@ class CampoMinado:
     def descobrir_zona(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
             if self.tabuleiro[x][y] == 'F':
+                print("Ação inválida. Você deve remover a bandeira antes de descobrir a zona.")
                 return
 
             if self.bombas[x][y]:

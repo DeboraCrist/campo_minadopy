@@ -29,6 +29,10 @@ def main():
             elif acao == 'D':
                 x = int(input("Digite a coordenada X: "))
                 y = int(input("Digite a coordenada Y: "))
+                try:
+                    jogo.descobrir_zona(x, y)
+                except ValueError as e:
+                    print(e) 
                 jogo.descobrir_zona(x, y)
                 if jogo.jogo_encerrado:
                     print("Você perdeu!")

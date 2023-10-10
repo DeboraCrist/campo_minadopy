@@ -161,5 +161,13 @@ class TestCampoMinado(unittest.TestCase):
         output_text = output_buffer.getvalue()
         self.assertIn("Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.", output_text)
 
+    def test_descobrir_zona_com_bandeira(self):
+        self.jogo.colocar_bandeira(0, 0)
+        output_buffer = StringIO()
+        with patch('sys.stdout', new=output_buffer):
+            self.jogo.descobrir_zona(0, 0)
+        output_text = output_buffer.getvalue()
+        self.assertIn("Ação inválida. Você deve remover a bandeira antes de descobrir a zona.", output_text)
+
 if __name__ == '__main__':
     unittest.main()
