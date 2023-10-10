@@ -1,7 +1,7 @@
 import unittest
 from campo_minado import CampoMinado
 
-class TestCampoMinado(unittest.TestCase):
+class TestBomba(unittest.TestCase):
 
     def setUp(self):
         self.jogo = CampoMinado(1) 
