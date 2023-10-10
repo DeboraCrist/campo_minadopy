@@ -1,3 +1,4 @@
+import sys
 from campo_minado import CampoMinado
 
 def main():
@@ -21,8 +22,8 @@ def main():
             acao = input("Escolha uma ação (D para descobrir, B para colocar bandeira, R para remover bandeira, Q para sair ou N para reiniciar): ").upper()
 
             if acao == 'Q':
-                print("Saindo do jogo.")
-                return  
+                jogo.sair()
+                sys.exit(0)
             elif acao == 'N':
                 print("Reiniciando o jogo.")
                 break  

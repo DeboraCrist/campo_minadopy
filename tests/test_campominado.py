@@ -169,5 +169,11 @@ class TestCampoMinado(unittest.TestCase):
         output_text = output_buffer.getvalue()
         self.assertIn("Ação inválida. Você deve remover a bandeira antes de descobrir a zona.", output_text)
 
+    def test_sair(self):
+        with patch("builtins.print") as mock_print:
+            self.jogo.sair()
+            mock_print.assert_called_once_with("Saindo do jogo.")
+
+        
 if __name__ == '__main__':
     unittest.main()

@@ -114,3 +114,7 @@ class CampoMinado:
         self.jogo_encerrado = False
         self.jogo_vencido = False
         self.bandeiras_colocadas = 0
+
+    def sair(self):
+        print("Saindo do jogo.")
+
