@@ -97,9 +97,19 @@ class TestCampoMinado(unittest.TestCase):
         self.jogo.reiniciar_jogo()
         self.assertTrue(all(cell == '-' for row in self.jogo.tabuleiro for cell in row))
 
-    def test_sair_print(self):
-        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+    def test_sair_lanca_excecao_system_exit(self):
+        with self.assertRaises(SystemExit):
             self.jogo.sair()
+
+    def test_sair_codigo_excecao_system_exit_e_nulo(self):
+        with self.assertRaises(SystemExit) as cm:
+            self.jogo.sair()
+        self.assertIsNone(cm.exception.code)
+
+    def test_sair_imprime_mensagem_de_saindo(self):
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            with self.assertRaises(SystemExit):
+                self.jogo.sair()
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Saindo do jogo.")
 
@@ -193,7 +203,6 @@ class TestCampoMinado(unittest.TestCase):
                 if not self.jogo.bombas[x][y]:
                     self.jogo.descobrir_zona(x, y)
         self.assertTrue(self.jogo.jogo_vencido)
-
   
 if __name__ == '__main__':
     unittest.main()

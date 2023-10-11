@@ -1,4 +1,5 @@
 import random
+import sys
 
 class CampoMinado:
     NIVEIS = {
@@ -132,3 +133,4 @@ class CampoMinado:
 
     def sair(self):
         print("Saindo do jogo.")
+        sys.exit()

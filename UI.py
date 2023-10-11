@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+
 from campo_minado import CampoMinado
 
 class JogoCampoMinadoGUI:
@@ -51,6 +52,12 @@ class JogoCampoMinadoTabuleiro:
                 linha.append(botao)
             self.botoes.append(linha)
 
+        reiniciar_button = ttk.Button(self.master, text="Reiniciar", command=self.reiniciar_jogo)
+        reiniciar_button.grid(row=self.jogo.tamanho, columnspan=self.jogo.tamanho)
+
+        sair_button = ttk.Button(self.master, text="Sair", command=self.sair_jogo)
+        sair_button.grid(row=self.jogo.tamanho + 1, columnspan=self.jogo.tamanho)
+
     def clicar_celula(self, x, y):
         if not self.jogo.jogo_encerrado:
             self.jogo.descobrir_zona(x, y)
@@ -61,13 +68,11 @@ class JogoCampoMinadoTabuleiro:
             elif self.jogo.jogo_encerrado:
                 self.mostrar_fim_de_jogo("Você perdeu!")
 
-
     def mostrar_fim_de_jogo(self, mensagem):
         for i in range(self.jogo.tamanho):
             for j in range(self.jogo.tamanho):
                 self.botoes[i][j].config(state="disabled")
         messagebox.showinfo("Fim de Jogo", mensagem)
-
 
     def atualizar_interface(self):
         for i in range(self.jogo.tamanho):
@@ -83,6 +88,13 @@ class JogoCampoMinadoTabuleiro:
                     botao.config(text='B', state="active", relief="sunken", bg="red")
                 else:
                     botao.config(text=celula, state="disabled", relief="raised", bg="light gray")
+
+    def reiniciar_jogo(self):
+        self.jogo.reiniciar_jogo()
+        self.atualizar_interface()
+
+    def sair_jogo(self):
+        self.jogo.sair() 
 
 if __name__ == "__main__":
     root = tk.Tk()
