@@ -113,16 +113,6 @@ class TestCampoMinado(unittest.TestCase):
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Saindo do jogo.")
 
-    # def test_descobrir_celula_ja_descoberta(self):
-    #     # Inicializar o jogo, revelando algumas células
-    #     self.jogo.descobrir_zona(1, 1)
-    #     self.jogo.descobrir_zona(2, 2)
-        
-    #     # Tentar descobrir uma célula que já foi descoberta
-    #     self.jogo.descobrir_zona(1, 1)
-    #     self.assertEqual(self.jogo.tabuleiro[1][1], '1')  
-
-    
     def test_descobrir_vizinhanca_celula_vazia(self):
         self.jogo.bombas = [[False] * 8 for _ in range(8)]
         self.jogo.descobrir_vizinhanca(4, 4) 
@@ -139,11 +129,6 @@ class TestCampoMinado(unittest.TestCase):
 
         self.assertEqual(self.jogo.tabuleiro, tabuleiro_esperado)
 
-    # def test_descobrir_celula_revelada(self):
-    #     jogo = CampoMinado(1)  # Substitua pelo nível desejado
-    #     jogo.descobrir_zona(0, 0)
-    #     jogo.descobrir_zona(0, 1)  # Tente descobrir uma célula vizinha
-    #     self.assertTrue(jogo.tabuleiro[0][1] == ' ', "A célula deve ser revelada")
 
     def test_numeros_nas_zonas_limpo_com_bombas_adjacentes_com4(self):
         self.jogo.bombas = [
@@ -171,18 +156,6 @@ class TestCampoMinado(unittest.TestCase):
         ]
         self.jogo.descobrir_zona(1, 1)
         self.assertEqual(self.jogo.tabuleiro[1][1], '7')
-
-    # def test_espacos_vazios_sem_bombas_adjacentes(self):
-    #   
-    #     jogo = CampoMinado(1)
-    #     jogo.bombas = [
-    #         [False, False, False],
-    #         [False, False, False],
-    #         [False, False, False]
-    #     
-    #     jogo.descobrir_zona(1, 1)
-
-    #     self.assertEqual(jogo.tabuleiro[1][1], ' ')
 
     def test_vencer_jogo(self):
         for x in range(self.jogo.tamanho):

@@ -101,6 +101,31 @@ class TestBandeira(unittest.TestCase):
         self.jogo.descobrir_zona(0, 0)
         self.assertNotEqual(self.jogo.tabuleiro[0][0], '-')
 
+    def test_contagem_de_uma_bandeiras(self):
+        self.jogo.inicializar_tabuleiro()
+        self.jogo.colocar_bandeira(0, 0)
+        self.assertEqual(self.jogo.bandeiras_colocadas, 1)
+        
+    def test_contagem_de_maximo_bandeiras(self):
+        self.jogo.inicializar_tabuleiro()
+        self.jogo.colocar_bandeira(0, 0)
+        self.jogo.colocar_bandeira(1, 1)
+        self.jogo.colocar_bandeira(2, 2)
+        self.jogo.colocar_bandeira(3, 3)
+        self.jogo.colocar_bandeira(4, 4)
+        self.jogo.colocar_bandeira(5, 5)
+        self.jogo.colocar_bandeira(6, 6)
+        self.jogo.colocar_bandeira(7, 7)
+        self.jogo.colocar_bandeira(5, 1)
+        self.jogo.colocar_bandeira(4, 2)
+        self.assertEqual(self.jogo.bandeiras_colocadas, 10)
+
+    def test_contagem_de_bandeiras_colocareremover(self):
+        self.jogo.inicializar_tabuleiro()
+        self.jogo.colocar_bandeira(0, 0)
+        self.jogo.remover_bandeira(0, 0)
+        self.jogo.colocar_bandeira(0, 0)
+        self.assertEqual(self.jogo.bandeiras_colocadas, 1)
     
 if __name__ == '__main__':
     unittest.main()

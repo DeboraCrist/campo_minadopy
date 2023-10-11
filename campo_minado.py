@@ -36,10 +36,8 @@ class CampoMinado:
             if self.tabuleiro[x][y] == 'F':
                 print("Ação inválida. Você deve remover a bandeira antes de descobrir a zona.")
                 return
-
             if self.tabuleiro[x][y] == ' ' or self.tabuleiro[x][y].isdigit():
                 return
-
             if self.bombas[x][y]:
                 self.jogo_encerrado = True
                 self.revelar_bombas()

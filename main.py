@@ -24,7 +24,7 @@ def main():
 
             if acao == 'Q':
                 jogo.sair()
-                continue_game = False  # Set the flag to False instead of raising SystemExit
+                continue_game = False 
             elif acao == 'N':
                 print("Reiniciando o jogo.")
                 break  
