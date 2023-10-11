@@ -1,4 +1,7 @@
 import tkinter as tk
+from tkinter import ttk
+import tkinter
+from tkinter import messagebox
 from campo_minado import CampoMinado
 
 class JogoCampoMinadoGUI:
@@ -10,16 +13,16 @@ class JogoCampoMinadoGUI:
         self.mostrar_tela_niveis()
 
     def mostrar_tela_niveis(self):
-        nivel_label = tk.Label(self.master, text="Escolha o nível de dificuldade:")
-        nivel_label.pack()
+        nivel_label = ttk.Label(self.master, text="Escolha o nível de dificuldade:", font=("Arial", 13))
+        nivel_label.pack(pady=10)
 
         niveis = ["Fácil (8x8 - 10 bombas)", "Intermediário (10x16 - 30 bombas)", "Difícil (24x24 - 100 bombas)"]
         for i, nivel in enumerate(niveis, start=1):
-            nivel_radio = tk.Radiobutton(self.master, text=nivel, variable=self.nivel_var, value=str(i))
-            nivel_radio.pack()
+            nivel_radio = ttk.Radiobutton(self.master, text=nivel, variable=self.nivel_var, value=str(i))
+            nivel_radio.pack(pady=5)
 
-        iniciar_button = tk.Button(self.master, text="Iniciar Jogo", command=self.iniciar_jogo)
-        iniciar_button.pack()
+        iniciar_button = ttk.Button(self.master, text="Iniciar Jogo", command=self.iniciar_jogo)
+        iniciar_button.pack(pady=10)
 
     def iniciar_jogo(self):
         nivel = int(self.nivel_var.get())
@@ -50,19 +53,22 @@ class JogoCampoMinadoTabuleiro:
             self.botoes.append(linha)
 
     def clicar_celula(self, x, y):
-        if not self.jogo.jogo_encerrado and not self.jogo.jogo_vencido:
+        if not self.jogo.jogo_encerrado:
             self.jogo.descobrir_zona(x, y)
             self.atualizar_interface()
-            if self.jogo.jogo_encerrado:
-                self.mostrar_fim_de_jogo("Você perdeu!")
-            elif self.jogo.jogo_vencido:
+            
+            if self.jogo.jogo_vencido:
                 self.mostrar_fim_de_jogo("Parabéns! Você venceu!")
+            elif self.jogo.jogo_encerrado:
+                self.mostrar_fim_de_jogo("Você perdeu!")
+
 
     def mostrar_fim_de_jogo(self, mensagem):
         for i in range(self.jogo.tamanho):
             for j in range(self.jogo.tamanho):
                 self.botoes[i][j].config(state="disabled")
-        tk.messagebox.showinfo("Fim de Jogo", mensagem)
+        messagebox.showinfo("Fim de Jogo", mensagem)
+
 
     def atualizar_interface(self):
         for i in range(self.jogo.tamanho):
