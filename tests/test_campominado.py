@@ -193,6 +193,7 @@ class TestCampoMinado(unittest.TestCase):
                 if not self.jogo.bombas[x][y]:
                     self.jogo.descobrir_zona(x, y)
         self.assertTrue(self.jogo.jogo_vencido)
+
   
 if __name__ == '__main__':
     unittest.main()

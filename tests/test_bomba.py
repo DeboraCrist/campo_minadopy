@@ -76,5 +76,47 @@ class TestBomba(unittest.TestCase):
         self.jogo.colocar_bandeira(1, 1)
         self.assertNotEqual(self.jogo.tabuleiro[1][1], 'B')
 
+    def test_bombas_nao_podem_ser_colocadas_na_primeira_zona_revelada_outro(self):
+        self.jogo.colocar_bandeira(0, 0)
+        self.jogo.descobrir_zona(0, 1)
+        self.assertNotEqual(self.jogo.tabuleiro[0][1], 'B')
+
+    def test_descobrir_celula_com_bomba_na_primeira_jogada(self):
+        self.jogo.bombas[0][0] = True
+        self.jogo.descobrir_zona(0, 0)
+        self.assertEqual(self.jogo.jogo_encerrado, True)
+        self.assertEqual(self.jogo.jogo_vencido, False)
+
+    def test_vencer_jogo_com_bandeira_na_ultima_bomba_corretamente(self):
+        for x in range(self.jogo.tamanho):
+            for y in range(self.jogo.tamanho):
+                if self.jogo.bombas[x][y]:
+                    self.jogo.colocar_bandeira(x, y)
+        self.jogo.verificar_vitoria()
+        self.assertTrue(self.jogo.jogo_vencido)
+
+    def test_revelar_bombas_apos_derrota(self):
+        self.jogo.bombas[0][0] = True
+        self.jogo.descobrir_zona(0, 0)
+        self.jogo.revelar_bombas()
+        self.assertEqual(self.jogo.tabuleiro[0][0], 'B')
+    
+    def test_colocar_mais_bandeiras_do_que_bombas_nao_vence_o_jogo(self):
+        self.jogo.bandeiras_colocadas = self.jogo.num_bombas + 1
+        self.jogo.verificar_vitoria()
+        self.assertEqual(self.jogo.jogo_vencido, False)
+
+    def test_descobrir_zona_com_bandeira_nao_altera_o_tabuleiro(self):
+        self.jogo.bombas[0][0] = True
+        self.jogo.colocar_bandeira(0, 0)
+        self.jogo.descobrir_zona(0, 0)
+        self.assertEqual(self.jogo.tabuleiro[0][0], 'F')
+
+    def test_vitoria_descobrir_todas_as_zonas_limpo_sem_bombas_adjacentes(self):
+        self.jogo.bombas = [[False] * self.jogo.tamanho for _ in range(self.jogo.tamanho)]
+        self.jogo.descobrir_zona(0, 0)
+        self.jogo.verificar_vitoria()
+        self.assertEqual(self.jogo.jogo_vencido, True)
+
 if __name__ == '__main__':
     unittest.main()

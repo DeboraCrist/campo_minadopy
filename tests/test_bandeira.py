@@ -94,6 +94,13 @@ class TestBandeira(unittest.TestCase):
                 if self.jogo.bombas[x][y]:
                     self.jogo.colocar_bandeira(x, y)
         self.assertEqual(self.jogo.bandeiras_colocadas, 10) 
+
+    def test_descobrir_zona_apos_colocar_e_remover_bandeira(self):
+        self.jogo.colocar_bandeira(0, 0)
+        self.jogo.remover_bandeira(0, 0)
+        self.jogo.descobrir_zona(0, 0)
+        self.assertNotEqual(self.jogo.tabuleiro[0][0], '-')
+
     
 if __name__ == '__main__':
     unittest.main()

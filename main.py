@@ -1,5 +1,4 @@
 from sys import exit
-import sys
 from campo_minado import CampoMinado
 
 def main():
