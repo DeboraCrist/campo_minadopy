@@ -14,8 +14,9 @@ def main():
 
     while True: 
         jogo = CampoMinado(nivel)
+        continue_game = True  # Flag to control game continuation
 
-        while True:  
+        while continue_game:  # Changed from `while True`
             for row in jogo.tabuleiro:
                 print(" ".join(row))
 
@@ -23,7 +24,7 @@ def main():
 
             if acao == 'Q':
                 jogo.sair()
-                raise SystemExit
+                continue_game = False  # Set the flag to False instead of raising SystemExit
             elif acao == 'N':
                 print("Reiniciando o jogo.")
                 break  
@@ -40,12 +41,12 @@ def main():
                     jogo.revelar_bombas()
                     for row in jogo.tabuleiro:
                         print(" ".join(row))
-                    break
+                    continue_game = False
                 elif jogo.jogo_vencido:
                     print("Parabéns! Você venceu!")
                     for row in jogo.tabuleiro:
                         print(" ".join(row))
-                    break
+                    continue_game = False
             elif acao == 'B':
                 x = int(input("Digite a coordenada X para colocar a bandeira: "))
                 y = int(input("Digite a coordenada Y para colocar a bandeira: "))
@@ -58,7 +59,7 @@ def main():
                 y = int(input("Digite a coordenada Y para remover a bandeira: "))
                 jogo.remover_bandeira(x, y)
             else:
-                print("Ação inválida. Escolha D para descobrir, B para colocar bandeira, R para remover bandeira, N para reiniciar ou Q para sair.")
+                print("Ação inválida. Escolha D para descobrir, B para colocar bandeira, R for remover bandeira, N para reiniciar ou Q para sair.")
 
 if __name__ == "__main__":
     main()
