@@ -36,6 +36,9 @@ class CampoMinado:
                 print("Ação inválida. Você deve remover a bandeira antes de descobrir a zona.")
                 return
 
+            if self.tabuleiro[x][y] == ' ' or self.tabuleiro[x][y].isdigit():
+                return
+
             if self.bombas[x][y]:
                 self.jogo_encerrado = True
                 self.revelar_bombas()
@@ -47,12 +50,14 @@ class CampoMinado:
     def descobrir_vizinhanca(self, x, y):
         if 0 <= x < self.tamanho and 0 <= y < self.tamanho and self.tabuleiro[x][y] == '-':
             bombas_adjacentes = self.contar_bombas_adjacentes(x, y)
-            self.tabuleiro[x][y] = str(bombas_adjacentes) if bombas_adjacentes > 0 else ' '
             if bombas_adjacentes == 0:
+                self.tabuleiro[x][y] = ' '
                 for dx in [-1, 0, 1]:
                     for dy in [-1, 0, 1]:
                         self.descobrir_vizinhanca(x + dx, y + dy)
-                    
+            else:
+                self.tabuleiro[x][y] = str(bombas_adjacentes) 
+                                
     def colocar_bombas(self):
         bombas_restantes = self.num_bombas
         while bombas_restantes > 0:
