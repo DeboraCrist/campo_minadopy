@@ -1,13 +1,13 @@
 import tkinter as tk
 import unittest
-from UI import JogoCampoMinadoTabuleiro
-from campo_minado import CampoMinado
+from UI import JogoCampoMinadoGUI, JogoCampoMinadoTabuleiro
+
 
 class TestCampoMinadoGUI(unittest.TestCase):
     def setUp(self):
         self.root = tk.Tk()
         self.app = JogoCampoMinadoTabuleiro(self.root, nivel=1)
-
+    
     def test_interface_inicial(self):
         self.assertEqual(self.app.nivel, 1)
         self.assertEqual(self.app.jogo.tamanho, 8)

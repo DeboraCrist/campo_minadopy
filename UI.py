@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-import tkinter
 from tkinter import messagebox
 from campo_minado import CampoMinado
 

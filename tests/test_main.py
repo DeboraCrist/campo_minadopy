@@ -1,28 +1,54 @@
-# import unittest
-# from unittest.mock import patch
-# from io import StringIO
-# from main import main
+from ast import main
+import unittest
+from unittest.mock import patch
 
-# class TestMain(unittest.TestCase):
+class TestCampoMinado(unittest.TestCase):
+    
+    @patch('builtins.input', side_effect=['1', 'N', 'Q'])
+    def test_main_quit_nivel1(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
 
-#     @patch('builtins.input', side_effect=['1', 'D', 'Q'])
-#     def test_main_game_quit(self, mock_input):
-#         output_buffer = StringIO()
-#         with patch('sys.stdout', new=output_buffer):
-#             main()
-#         output_text = output_buffer.getvalue().strip()
-#         self.assertEqual(output_text, "Bem-vindo ao Campo Minado!\nSaindo do jogo.")
+    @patch('builtins.input', side_effect=['1', 'N', 'D', '0', '0', 'Q'])
+    def test_main_descobrir_quit_nivel1(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
 
+    @patch('builtins.input', side_effect=['1', 'N', 'D', '0', '0', 'B', '0', '0', 'R', '0', '0', 'Q'])
+    def test_main_descobrir_bandeira_remover_quit_nivel1(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
 
+    @patch('builtins.input', side_effect=['2', 'N', 'Q'])
+    def test_main_quit_nivel2(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
 
-#     @patch('builtins.input', side_effect=['1', 'D', 'N', 'Q'])
-#     def test_main_game_restart_quit(self, mock_input):
-#         output_buffer = StringIO()
-#         with patch('sys.stdout', new=output_buffer):
-#             main()
-#         output_text = output_buffer.getvalue().strip()
-#         self.assertIn("Reiniciando o jogo.", output_text)
-#         self.assertIn("Saindo do jogo.", output_text)
+    @patch('builtins.input', side_effect=['2', 'N', 'D', '0', '0', 'Q'])
+    def test_main_descobrir_quit_nivel2(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
 
-# if __name__ == '__main__':
-#     unittest.main()
+    @patch('builtins.input', side_effect=['2', 'N', 'D', '0', '0', 'B', '0', '0', 'R', '0', '0', 'Q'])
+    def test_main_descobrir_bandeira_remover_quit_nivel2(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
+
+    @patch('builtins.input', side_effect=['3', 'N', 'Q'])
+    def test_main_quit_nivel3(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
+
+    @patch('builtins.input', side_effect=['3', 'N', 'D', '0', '0', 'Q'])
+    def test_main_descobrir_quit_nivel3(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
+
+    @patch('builtins.input', side_effect=['3', 'N', 'D', '0', '0', 'B', '0', '0', 'R', '0', '0', 'Q'])
+    def test_main_descobrir_bandeira_remover_quit_nivel3(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
+
+if __name__ == '__main__':
+    unittest.main()
+

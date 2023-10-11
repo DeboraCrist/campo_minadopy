@@ -14,9 +14,9 @@ def main():
 
     while True: 
         jogo = CampoMinado(nivel)
-        continue_game = True  # Flag to control game continuation
+        continue_game = True  
 
-        while continue_game:  # Changed from `while True`
+        while continue_game:  
             for row in jogo.tabuleiro:
                 print(" ".join(row))
 
