@@ -162,6 +162,37 @@ class TestCampoMinado(unittest.TestCase):
         self.jogo.descobrir_zona(1, 1)
         self.assertEqual(self.jogo.tabuleiro[1][1], '7')
 
-            
+    # def test_espacos_vazios_sem_bombas_adjacentes(self):
+    #   
+    #     jogo = CampoMinado(1)
+    #     jogo.bombas = [
+    #         [False, False, False],
+    #         [False, False, False],
+    #         [False, False, False]
+    #     
+    #     jogo.descobrir_zona(1, 1)
+
+    #     self.assertEqual(jogo.tabuleiro[1][1], ' ')
+
+    def test_vencer_jogo(self):
+        for x in range(self.jogo.tamanho):
+            for y in range(self.jogo.tamanho):
+                if not self.jogo.bombas[x][y]:
+                    self.jogo.descobrir_zona(x, y)
+        self.assertTrue(self.jogo.jogo_vencido)
+
+    def test_descobrir_zona_com_jogo_encerrado(self):
+        self.jogo.bombas[0][0] = True
+        self.jogo.descobrir_zona(0, 0)
+        self.jogo.descobrir_zona(1, 1)
+        self.assertTrue(self.jogo.jogo_encerrado)
+
+    def test_descobrir_zona_com_jogo_vencido(self):
+        for x in range(self.jogo.tamanho):
+            for y in range(self.jogo.tamanho):
+                if not self.jogo.bombas[x][y]:
+                    self.jogo.descobrir_zona(x, y)
+        self.assertTrue(self.jogo.jogo_vencido)
+  
 if __name__ == '__main__':
     unittest.main()

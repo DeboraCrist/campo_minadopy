@@ -56,7 +56,7 @@ class CampoMinado:
                     for dy in [-1, 0, 1]:
                         self.descobrir_vizinhanca(x + dx, y + dy)
             else:
-                self.tabuleiro[x][y] = str(bombas_adjacentes) 
+                self.tabuleiro[x][y] = str(bombas_adjacentes)
                                 
     def colocar_bombas(self):
         bombas_restantes = self.num_bombas
