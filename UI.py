@@ -42,25 +42,31 @@ class JogoCampoMinadoTabuleiro:
         for i in range(self.jogo.tamanho):
             linha = []
             for j in range(self.jogo.tamanho):
-                botao = tk.Button(self.master, text='', width=2, height=1,
-                                 command=lambda x=i, y=j: self.clicar_celula(x, y))
-                botao.grid(row=i, column=j)
+                botao = tk.Button(self.master, text='', width=1, height=1, command=lambda x=i, y=j: self.clicar_celula(x, y), font=("Arial", 8))
+                botao.grid(row=i, column=j) 
                 linha.append(botao)
             self.botoes.append(linha)
+        
+        botoes_frame = tk.Frame(self.master)
+        botoes_frame.grid(row=self.jogo.tamanho, columnspan=self.jogo.tamanho)
 
-        reiniciar_button = ttk.Button(self.master, text="Reiniciar", command=self.reiniciar_jogo)
-        reiniciar_button.grid(row=self.jogo.tamanho, columnspan=self.jogo.tamanho)
+        reiniciar_button = ttk.Button(botoes_frame, text="Reiniciar", command=self.reiniciar_jogo)
+        reiniciar_button.grid(row=0, column=0)
+        self.reiniciar_button = reiniciar_button 
 
-        sair_button = ttk.Button(self.master, text="Sair", command=self.sair_jogo)
-        sair_button.grid(row=self.jogo.tamanho + 1, columnspan=self.jogo.tamanho)
+        sair_button = ttk.Button(botoes_frame, text="Sair", command=self.sair_jogo)
+        sair_button.grid(row=0, column=1)
+        self.sair_button = sair_button
 
-        self.modo_bandeira_button = ttk.Button(self.master, text="Alternar Modo Bandeira", command=self.alternar_modo_bandeira)
-        self.modo_bandeira_button.grid(row=self.jogo.tamanho + 2, columnspan=self.jogo.tamanho)
-
+        self.modo_bandeira_button = ttk.Button(botoes_frame, text="Modo Bandeira", command=self.alternar_modo_bandeira)
+        self.modo_bandeira_button.grid(row=0, column=2)
+        
         self.num_bandeiras_var = tk.StringVar()
         num_bandeiras_label = ttk.Label(self.master, textvariable=self.num_bandeiras_var, font=("Arial", 12))
-        num_bandeiras_label.grid(row=self.jogo.tamanho + 3, columnspan=self.jogo.tamanho)
+        num_bandeiras_label.grid(row=self.jogo.tamanho + 1, columnspan=self.jogo.tamanho)
         self.atualizar_num_bandeiras()
+        self.num_bandeiras_label = num_bandeiras_label
+
 
     def clicar_celula(self, x, y):
         if not self.jogo.jogo_encerrado:
@@ -100,9 +106,9 @@ class JogoCampoMinadoTabuleiro:
     def alternar_modo_bandeira(self):
         self.modo_bandeira = not self.modo_bandeira
         if self.modo_bandeira:
-            self.modo_bandeira_button.config(text="Modo Bandeira ON", style='Red.TButton')
+            self.modo_bandeira_button.config(text="Bandeira ON", style='Red.TButton')
         else:
-            self.modo_bandeira_button.config(text="Modo Bandeira OFF", style='TButton')
+            self.modo_bandeira_button.config(text="Bandeira OFF", style='TButton')
 
     def atualizar_num_bandeiras(self):
         num_bandeiras_colocadas = self.jogo.bandeiras_colocadas

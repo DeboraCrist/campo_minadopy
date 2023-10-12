@@ -118,6 +118,67 @@ class TestCampoMinadoGUI(unittest.TestCase):
             self.app.clicar_celula(i, i)
         self.assertEqual(self.app.jogo.bandeiras_colocadas, 5)
 
+    def test_botoes_no_tabuleiro(self):
+        for linha in self.app.botoes:
+            for botao in linha:
+                self.assertTrue(botao.winfo_exists())  
+
+    def test_botao_reiniciar(self):
+        self.assertTrue(self.app.reiniciar_button.winfo_exists())
+
+    def test_botao_sair(self):
+        self.assertTrue(self.app.sair_button.winfo_exists())
+
+    def test_botao_modo_bandeira(self):
+        self.assertTrue(self.app.modo_bandeira_button.winfo_exists())
+
+    def test_label_num_bandeiras(self):
+        self.assertTrue(self.app.num_bandeiras_label.winfo_exists())
+
+    def test_botoes_no_tabuleiro_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        for linha in app.botoes:
+            for botao in linha:
+                self.assertTrue(botao.winfo_exists())  
+
+    def test_botao_reiniciar_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.assertTrue(app.reiniciar_button.winfo_exists())
+
+    def test_botao_sair_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.assertTrue(app.sair_button.winfo_exists())
+
+    def test_botao_modo_bandeira_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.assertTrue(app.modo_bandeira_button.winfo_exists())
+
+    def test_label_num_bandeiras_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.assertTrue(app.num_bandeiras_label.winfo_exists())
+
+    def test_botoes_no_tabuleiro_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        for linha in app.botoes:
+            for botao in linha:
+                self.assertTrue(botao.winfo_exists())  
+
+    def test_botao_reiniciar_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.assertTrue(app.reiniciar_button.winfo_exists())
+
+    def test_botao_sair_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.assertTrue(app.sair_button.winfo_exists())
+
+    def test_botao_modo_bandeira_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.assertTrue(app.modo_bandeira_button.winfo_exists())
+
+    def test_label_num_bandeiras_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.assertTrue(app.num_bandeiras_label.winfo_exists())
+
     def tearDown(self):
         self.root.destroy()
 
