@@ -179,6 +179,14 @@ class TestCampoMinadoGUI(unittest.TestCase):
         app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
         self.assertTrue(app.num_bandeiras_label.winfo_exists())
 
+    def test_celulas_estao_vazias_inicialmente(self):
+        for linha in self.app.botoes:
+            for botao in linha:
+                self.assertEqual(botao.cget('text'), '', "A célula deve estar vazia inicialmente")
+                self.assertEqual(botao.cget('state'), 'normal', "O estado da célula deve ser 'normal'")
+                self.assertIn(botao.cget('bg'), {'light gray', '#d9d9d9'}, "A cor de fundo da célula deve ser 'light gray'")
+
+    
     def tearDown(self):
         self.root.destroy()
 

@@ -1,3 +1,4 @@
+import random
 import unittest
 from campo_minado import CampoMinado
 from unittest.mock import patch
@@ -176,6 +177,48 @@ class TestCampoMinado(unittest.TestCase):
                 if not self.jogo.bombas[x][y]:
                     self.jogo.descobrir_zona(x, y)
         self.assertTrue(self.jogo.jogo_vencido)
-  
+    
+    def test_realizar_primeira_jogada_celula_segura(self):
+        x, y = 0, 0 
+        self.jogo.realizar_primeira_jogada(x, y)
+        self.assertFalse(self.jogo.bombas[x][y])
+
+    def test_realizar_primeira_jogada_celula_segura2(self):
+        x, y = 0, 0 
+        self.jogo.realizar_primeira_jogada(x, y)
+        self.assertNotEqual(self.jogo.tabuleiro[x][y], '-')
+
+    def test_realizar_primeira_jogada_com_bomba(self):
+        self.jogo.bombas[0][0] = True
+        x, y = 0, 0
+        self.jogo.realizar_primeira_jogada(x, y)
+        self.assertFalse(self.jogo.jogo_encerrado)
+
+    def test_realizar_primeira_jogada_sem_bomba(self):
+        self.jogo.bombas[1][0] = True
+        x, y = 0, 0
+        self.jogo.realizar_primeira_jogada(x, y)
+        self.assertFalse(self.jogo.jogo_encerrado)
+
+    def test_realizar_primeira_jogada_com_multiplas_tentativas(self):
+        bomb_x, bomb_y = 0, 0
+        self.jogo.bombas[bomb_x][bomb_y] = True
+        for _ in range(100):
+            x, y = bomb_x, bomb_y
+            while x == bomb_x and y == bomb_y:
+                x = random.randint(0, self.jogo.tamanho - 1)
+                y = random.randint(0, self.jogo.tamanho - 1)
+            self.jogo.realizar_primeira_jogada(x, y)
+            if self.jogo.tabuleiro[x][y] != '-':
+                break  
+        self.assertFalse(self.jogo.bombas[x][y])
+
+    def test_jogo_nao_encerrado(self):
+        self.assertFalse(self.jogo.jogo_encerrado)
+
+    def test_niveis_dificuldade_invalidos(self):
+        with self.assertRaises(ValueError):
+            CampoMinado(4)
+
 if __name__ == '__main__':
     unittest.main()

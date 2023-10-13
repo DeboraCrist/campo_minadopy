@@ -10,14 +10,18 @@ class CampoMinado:
 
     def __init__(self, nivel):
         self.nivel = nivel
-        self.tabuleiro = []
-        self.bombas = []
-        self.tamanho = 0
-        self.num_bombas = 0
+        self.tamanho = 0 
+        self.num_bombas = 0  
+        self.bombas = [[False for _ in range(self.tamanho)] for _ in range(self.tamanho)]
         self.jogo_encerrado = False
         self.jogo_vencido = False
         self.bandeiras_colocadas = 0
         self.inicializar_tabuleiro()
+
+    def realizar_primeira_jogada(self, x, y):
+        while self.bombas[x][y]:
+            self.inicializar_tabuleiro()
+        self.descobrir_vizinhanca(x, y)
 
     def inicializar_tabuleiro(self):
         if self.nivel not in self.NIVEIS:
@@ -56,15 +60,32 @@ class CampoMinado:
                         self.descobrir_vizinhanca(x + dx, y + dy)
             else:
                 self.tabuleiro[x][y] = str(bombas_adjacentes)
-                                
+
     def colocar_bombas(self):
         bombas_restantes = self.num_bombas
-        while bombas_restantes > 0:
+        primeiro_revelado = False
+        x_primeiro_revelado = 0
+        y_primeiro_revelado = 0
+
+        while bombas_restantes > 0 and not self.jogo_encerrado:
             x = random.randint(0, self.tamanho - 1)
             y = random.randint(0, self.tamanho - 1)
+
+            if not primeiro_revelado:
+                if self.tabuleiro[x][y] != '-':
+                    continue
+                primeiro_revelado = True
+                x_primeiro_revelado = x
+                y_primeiro_revelado = y
+                continue 
+
+            if x == x_primeiro_revelado and y == y_primeiro_revelado:
+                continue 
+
             if not self.bombas[x][y]:
                 self.bombas[x][y] = True
                 bombas_restantes -= 1
+                print(f"Bomba colocada em ({x}, {y})")
 
     def contar_bombas_adjacentes(self, x, y):
         count = 0
@@ -100,7 +121,6 @@ class CampoMinado:
                     print("Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.")
             else:
                 print("Posição fora do tabuleiro.")
-        
 
     def verificar_vitoria(self):
         if self.bandeiras_colocadas == self.num_bombas:

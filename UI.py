@@ -36,6 +36,7 @@ class JogoCampoMinadoTabuleiro:
         self.jogo = CampoMinado(nivel)
         self.modo_bandeira = False  
         self.criar_tabuleiro()
+      
 
     def criar_tabuleiro(self):
         self.botoes = []
@@ -67,7 +68,6 @@ class JogoCampoMinadoTabuleiro:
         self.atualizar_num_bandeiras()
         self.num_bandeiras_label = num_bandeiras_label
 
-
     def clicar_celula(self, x, y):
         if not self.jogo.jogo_encerrado:
             if self.modo_bandeira:
@@ -98,7 +98,7 @@ class JogoCampoMinadoTabuleiro:
                 elif celula == 'F':
                     botao.config(text='F', state="active", relief="raised", bg="yellow")
                 elif celula == 'B':
-                    botao.config(text='B', state="active", relief="sunken", bg="red")
+                    botao.config(text='B', state="disabled", relief="sunken", bg="red")  
                 else:
                     botao.config(text=celula, state="disabled", relief="raised", bg="light gray")
         self.atualizar_num_bandeiras()
@@ -114,10 +114,13 @@ class JogoCampoMinadoTabuleiro:
         num_bandeiras_colocadas = self.jogo.bandeiras_colocadas
         num_bandeiras_restantes = self.jogo.num_bombas - num_bandeiras_colocadas
         self.num_bandeiras_var.set(f'Bandeiras: {num_bandeiras_colocadas}/{self.jogo.num_bombas}')
-
+    
     def reiniciar_jogo(self):
         self.jogo.reiniciar_jogo()
         self.atualizar_interface()
+        for i in range(self.jogo.tamanho):
+            for j in range(self.jogo.tamanho):
+                self.botoes[i][j].config(text='') 
 
     def sair_jogo(self):
         self.jogo.sair()
@@ -126,4 +129,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = JogoCampoMinadoGUI(root)
     root.mainloop()
-
