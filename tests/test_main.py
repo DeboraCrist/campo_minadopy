@@ -77,7 +77,6 @@ class TestCampoMinado(unittest.TestCase):
                 main()
             self.assertNotEqual(cm.exception.code, None)
 
-  
 if __name__ == '__main__':
     unittest.main()
 

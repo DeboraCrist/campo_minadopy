@@ -85,8 +85,7 @@ class CampoMinado:
             if not self.bombas[x][y]:
                 self.bombas[x][y] = True
                 bombas_restantes -= 1
-                print(f"Bomba colocada em ({x}, {y})")
-
+    
     def contar_bombas_adjacentes(self, x, y):
         count = 0
         for dx in [-1, 0, 1]:

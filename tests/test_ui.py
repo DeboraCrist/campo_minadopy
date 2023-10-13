@@ -1,6 +1,7 @@
 import tkinter as tk
 import unittest
-from UI import JogoCampoMinadoTabuleiro
+from UI import JogoCampoMinadoGUI, JogoCampoMinadoTabuleiro
+from campo_minado import CampoMinado
 
 class TestCampoMinadoGUI(unittest.TestCase):
     def setUp(self):
@@ -18,9 +19,16 @@ class TestCampoMinadoGUI(unittest.TestCase):
         botao = self.app.botoes[0][0]
         self.assertEqual(botao['text'], '1')
 
-    def teste_perda_do_jogo(self):
+    def teste_perda_jogo_na_primeira_jogada(self):
         self.app.jogo.bombas[0][0] = True
         self.app.clicar_celula(0, 0)
+        self.assertFalse(self.app.jogo.jogo_encerrado)
+
+    def teste_perda_jogo_na_segunda_jogada(self):
+        self.app.jogo.bombas[0][0] = True
+        self.app.clicar_celula(0, 0)
+        self.app.jogo.bombas[1][0] = True
+        self.app.clicar_celula(1, 0)
         self.assertTrue(self.app.jogo.jogo_encerrado)
 
     def test_vitoria_jogo(self):
@@ -185,8 +193,16 @@ class TestCampoMinadoGUI(unittest.TestCase):
                 self.assertEqual(botao.cget('text'), '', "A célula deve estar vazia inicialmente")
                 self.assertEqual(botao.cget('state'), 'normal', "O estado da célula deve ser 'normal'")
                 self.assertIn(botao.cget('bg'), {'light gray', '#d9d9d9'}, "A cor de fundo da célula deve ser 'light gray'")
-
     
+    def test_redistribuicao_de_bombas_apos_primeira_jogada(self):
+        jogo = CampoMinado(1)
+        self.app.jogo.bombas[0][0] = True
+        try:
+            jogo.realizar_primeira_jogada(0, 0)
+        except ValueError:
+            pass
+        self.assertNotIn((0, 0), jogo.bombas)
+
     def tearDown(self):
         self.root.destroy()
 

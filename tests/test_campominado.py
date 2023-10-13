@@ -1,5 +1,8 @@
 import random
 import unittest
+
+import xdg
+import yaml
 from campo_minado import CampoMinado
 from unittest.mock import patch
 from io import StringIO
@@ -220,5 +223,13 @@ class TestCampoMinado(unittest.TestCase):
         with self.assertRaises(ValueError):
             CampoMinado(4)
 
+    def test_descobrir_zona_com_bandeira(self):
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            self.jogo.colocar_bandeira(1, 1)  
+            self.jogo.descobrir_zona(1, 1) 
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Ação inválida. Você deve remover a bandeira antes de descobrir a zona.")
+
+   
 if __name__ == '__main__':
     unittest.main()

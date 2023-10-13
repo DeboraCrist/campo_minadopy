@@ -36,7 +36,7 @@ class JogoCampoMinadoTabuleiro:
         self.jogo = CampoMinado(nivel)
         self.modo_bandeira = False  
         self.criar_tabuleiro()
-      
+        self.primeira_jogada = True
 
     def criar_tabuleiro(self):
         self.botoes = []
@@ -73,7 +73,15 @@ class JogoCampoMinadoTabuleiro:
             if self.modo_bandeira:
                 self.jogo.colocar_bandeira(x, y)
             else:
-                self.jogo.descobrir_zona(x, y)
+                if self.primeira_jogada:
+                    try:
+                        self.jogo.realizar_primeira_jogada(x, y)
+                        self.primeira_jogada = False
+                    except ValueError as e:
+                        messagebox.showerror("Erro", str(e))
+                        return
+                else:
+                    self.jogo.descobrir_zona(x, y)
 
             self.atualizar_interface()
             if self.jogo.jogo_vencido:
@@ -116,11 +124,12 @@ class JogoCampoMinadoTabuleiro:
         self.num_bandeiras_var.set(f'Bandeiras: {num_bandeiras_colocadas}/{self.jogo.num_bombas}')
     
     def reiniciar_jogo(self):
-        self.jogo.reiniciar_jogo()
+        self.jogo = CampoMinado(self.nivel) 
+        self.primeira_jogada = True
         self.atualizar_interface()
         for i in range(self.jogo.tamanho):
             for j in range(self.jogo.tamanho):
-                self.botoes[i][j].config(text='') 
+                self.botoes[i][j].config(text='')
 
     def sair_jogo(self):
         self.jogo.sair()
