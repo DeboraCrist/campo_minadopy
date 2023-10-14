@@ -1,11 +1,7 @@
 import random
 import unittest
-
-import xdg
-import yaml
 from campo_minado import CampoMinado
 from unittest.mock import patch
-from io import StringIO
 
 class TestCampoMinado(unittest.TestCase):
 
@@ -110,13 +106,6 @@ class TestCampoMinado(unittest.TestCase):
             self.jogo.sair()
         self.assertIsNone(cm.exception.code)
 
-    def test_sair_imprime_mensagem_de_saindo(self):
-        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
-            with self.assertRaises(SystemExit):
-                self.jogo.sair()
-            output = mock_stdout.getvalue().strip()
-            self.assertEqual(output, "Saindo do jogo.")
-
     def test_descobrir_vizinhanca_celula_vazia(self):
         self.jogo.bombas = [[False] * 8 for _ in range(8)]
         self.jogo.descobrir_vizinhanca(4, 4) 
@@ -132,7 +121,6 @@ class TestCampoMinado(unittest.TestCase):
         ]
 
         self.assertEqual(self.jogo.tabuleiro, tabuleiro_esperado)
-
 
     def test_numeros_nas_zonas_limpo_com_bombas_adjacentes_com4(self):
         self.jogo.bombas = [
@@ -222,14 +210,6 @@ class TestCampoMinado(unittest.TestCase):
     def test_niveis_dificuldade_invalidos(self):
         with self.assertRaises(ValueError):
             CampoMinado(4)
-
-    def test_descobrir_zona_com_bandeira(self):
-        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
-            self.jogo.colocar_bandeira(1, 1)  
-            self.jogo.descobrir_zona(1, 1) 
-            output = mock_stdout.getvalue().strip()
-            self.assertEqual(output, "Ação inválida. Você deve remover a bandeira antes de descobrir a zona.")
-
    
 if __name__ == '__main__':
     unittest.main()

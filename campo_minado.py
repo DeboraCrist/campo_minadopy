@@ -25,7 +25,7 @@ class CampoMinado:
 
     def inicializar_tabuleiro(self):
         if self.nivel not in self.NIVEIS:
-            raise ValueError("Nível de dificuldade inválido")
+            raise ValueError("Nível de dificuldade inválido") 
 
         nivel_info = self.NIVEIS[self.nivel]
         self.tamanho = nivel_info['tamanho']
@@ -85,6 +85,7 @@ class CampoMinado:
             if not self.bombas[x][y]:
                 self.bombas[x][y] = True
                 bombas_restantes -= 1
+        
     
     def contar_bombas_adjacentes(self, x, y):
         count = 0
@@ -114,12 +115,10 @@ class CampoMinado:
                 elif self.tabuleiro[x][y] == 'F':
                     self.tabuleiro[x][y] = '-'
                     self.bandeiras_colocadas -= 1
-                elif self.tabuleiro[x][y] == 'B':
-                    print("Ação inválida. Você não pode colocar uma bandeira em uma bomba.")
                 else:
                     print("Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.")
             else:
-                print("Posição fora do tabuleiro.")
+                print("Posição fora do tabuleiro.") 
 
     def verificar_vitoria(self):
         if self.bandeiras_colocadas == self.num_bombas:
