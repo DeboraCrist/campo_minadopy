@@ -160,7 +160,6 @@ class CampoMinado:
         self.jogo_vencido = False
         self.bandeiras_colocadas = 0
 
-
     def consultar_historico(self):
         return self.resultados
 
