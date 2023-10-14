@@ -93,9 +93,11 @@ class CampoMinado:
         count = 0
         for dx in [-1, 0, 1]:
             for dy in [-1, 0, 1]:
-                if 0 <= x + dx < self.linhas and 0 <= y + dy < self.colunas and self.bombas[x + dx][y + dy]:
-                    count += 1
+                if 0 <= x + dx < self.linhas and 0 <= y + dy < self.colunas:
+                    if self.bombas[x + dx][y + dy]:
+                        count += 1
         return count
+
 
     def revelar_bombas(self):
         for x in range(self.linhas):

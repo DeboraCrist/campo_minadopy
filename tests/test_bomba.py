@@ -118,5 +118,50 @@ class TestBomba(unittest.TestCase):
         self.jogo.verificar_vitoria()
         self.assertEqual(self.jogo.jogo_vencido, True)
 
+
+    def test_bomba_explode_inicio(self):
+        self.jogo.bombas = [
+            [False, True, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False]
+        ]
+        self.jogo.descobrir_zona(0, 0)
+        self.jogo.descobrir_zona(0, 1)
+        self.assertTrue(self.jogo.jogo_encerrado)
+    
+    def test_bomba_explode_meio(self):
+        self.jogo.bombas = [
+            [False, False, False, False, False, False, False, False],
+            [False, True, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, True, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False]
+        ]
+        self.jogo.descobrir_zona(0, 0)
+        self.jogo.descobrir_zona(5, 5)
+        self.assertFalse(self.jogo.jogo_vencido)
+
+    def test_bomba_explode_fim(self):
+        self.jogo.bombas = [
+            [False, False, False, False, False, False, False, False],
+            [False, True, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False, True]
+        ]
+        self.jogo.descobrir_zona(0, 0)
+        self.jogo.descobrir_zona(7, 7)
+        self.assertTrue(self.jogo.jogo_encerrado)
 if __name__ == '__main__':
     unittest.main()

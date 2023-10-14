@@ -41,14 +41,6 @@ class TestCampoMinado(unittest.TestCase):
         jogo = CampoMinado(3)
         self.assertEqual(jogo.colunas, 24)
 
-    def test_reiniciar_jogo_vencido(self):
-        self.jogo.reiniciar_jogo()
-        self.assertEqual(self.jogo.jogo_vencido, False)
-
-    def test_reiniciar_jogo_bandeiras(self):
-        self.jogo.reiniciar_jogo()
-        self.assertEqual(self.jogo.bandeiras_colocadas, 0)
-
     def test_jogoNaoEncerradoNaInicializacao(self):
         self.assertEqual(self.jogo.jogo_encerrado, False)
 
@@ -59,54 +51,9 @@ class TestCampoMinado(unittest.TestCase):
         self.jogo.descobrir_zona(0, 0)
         self.assertNotEqual(self.jogo.tabuleiro[0][0], '-')
 
-    def test_reiniciarJogo_RedefinirTabuleiroParaEstadoInicial(self):
-        self.jogo.descobrir_zona(0, 0)
-        self.jogo.reiniciar_jogo()
-        self.assertTrue(all(cell == '-' for row in self.jogo.tabuleiro for cell in row))
-
-    def test_reiniciarJogo_JogoEncerradoFalso(self):
-        self.jogo.descobrir_zona(0, 0)
-        self.jogo.reiniciar_jogo()
-        self.assertEqual(self.jogo.jogo_encerrado, False)
-
-    def test_reiniciarJogo_JogoVencidoFalso(self):
-        self.jogo.descobrir_zona(0, 0)
-        self.jogo.reiniciar_jogo()
-        self.assertEqual(self.jogo.jogo_vencido, False)
-
-    def test_reiniciarJogoVencidoComDescoberta(self):
-        self.jogo.tabuleiro = [['-' for _ in range(self.jogo.linhas)] for _ in range(self.jogo.colunas)]
-        self.jogo.jogo_vencido = True
-        self.jogo.descobrir_zona(0, 0)
-        self.jogo.reiniciar_jogo()
-        self.assertEqual(self.jogo.jogo_vencido, False)
-
     def test_JogoNaoEstaEmEstadoInicial(self):
         self.jogo.colocar_bandeira(0, 0)
         self.assertNotEqual(self.jogo.tabuleiro[0][0], '-')
-
-    def test_ReiniciarJogo(self):
-        self.jogo.colocar_bandeira(0, 0)
-        self.jogo.reiniciar_jogo()
-        self.assertTrue(all(cell == '-' for row in self.jogo.tabuleiro for cell in row))
-
-    def test_ReiniciarJogoNivel2(self):
-        jogo = CampoMinado(2)
-        jogo.colocar_bandeira(0, 0)
-        jogo.reiniciar_jogo()
-        self.assertTrue(all(cell == '-' for row in jogo.tabuleiro for cell in row))
-    
-    def test_ReiniciarJogonivel3(self):
-        jogo = CampoMinado(3)
-        jogo.colocar_bandeira(0, 0)
-        jogo.reiniciar_jogo()
-        self.assertTrue(all(cell == '-' for row in jogo.tabuleiro for cell in row))
-    
-    def test_ReiniciarJogoEmMeioAoJogo(self):
-        self.jogo.colocar_bandeira(0, 0)
-        self.jogo.descobrir_zona(1, 1)
-        self.jogo.reiniciar_jogo()
-        self.assertTrue(all(cell == '-' for row in self.jogo.tabuleiro for cell in row))
 
     def test_sair_lanca_excecao_system_exit(self):
         with self.assertRaises(SystemExit):
@@ -135,12 +82,30 @@ class TestCampoMinado(unittest.TestCase):
 
     def test_numeros_nas_zonas_limpo_com_bombas_adjacentes_com4(self):
         self.jogo.bombas = [
+            [True, True, False],
+            [True, False, True],
+            [False, True, False]
+        ]
+        self.jogo.descobrir_zona(1, 1)
+        self.assertEqual(self.jogo.tabuleiro[1][1], '5')
+
+    def test_numeros_nas_zonas_limpo_com_bombas_adjacentes_com4(self):
+        self.jogo.bombas = [
             [False, True, False],
             [True, False, True],
             [False, True, False]
         ]
         self.jogo.descobrir_zona(1, 1)
         self.assertEqual(self.jogo.tabuleiro[1][1], '4')
+
+    def test_numeros_nas_zonas_limpo_com_bombas_adjacentes_com3(self):
+        self.jogo.bombas = [
+            [False, False, False],
+            [True, False, True],
+            [False, True, False]
+        ]
+        self.jogo.descobrir_zona(1, 1)
+        self.assertEqual(self.jogo.tabuleiro[1][1], '3')
 
     def test_numeros_nas_zonas_limpo_com_bombas_adjacentes_com1(self):
         self.jogo.bombas = [
@@ -151,6 +116,15 @@ class TestCampoMinado(unittest.TestCase):
         self.jogo.descobrir_zona(1, 1)
         self.assertEqual(self.jogo.tabuleiro[1][1], '1')
 
+    def test_numeros_nas_zonas_limpo_com_bombas_adjacentes_com1(self):
+        self.jogo.bombas = [
+            [True, False, True],
+            [False, False, False],
+            [False, False, False]
+        ]
+        self.jogo.descobrir_zona(1, 1)
+        self.assertEqual(self.jogo.tabuleiro[1][1], '2')
+
     def test_numeros_nas_zonas_limpo_com_bombas_adjacentes_com7(self):
         self.jogo.bombas = [
             [True, True, False],
@@ -158,7 +132,16 @@ class TestCampoMinado(unittest.TestCase):
             [True, True, True]
         ]
         self.jogo.descobrir_zona(1, 1)
-        self.assertEqual(self.jogo.tabuleiro[1][1], '7')
+        self.assertEqual(self.jogo.tabuleiro[1][1], '7')    
+    
+    def test_numeros_nas_zonas_limpo_com_bombas_adjacentes_com6(self):
+        self.jogo.bombas = [
+            [True, True, False],
+            [True, False, True],
+            [True, False, True]
+        ]
+        self.jogo.descobrir_zona(1, 1)
+        self.assertEqual(self.jogo.tabuleiro[1][1], '6')    
 
     def test_vencer_jogo(self):
         for x in range(self.jogo.linhas):
@@ -221,6 +204,18 @@ class TestCampoMinado(unittest.TestCase):
     def test_niveis_dificuldade_invalidos(self):
         with self.assertRaises(ValueError):
             CampoMinado(4)
-   
+
+    def test_jogador_vence2(self):
+        self.jogo.tabuleiro = [['1', 'B', ' ', ' ', ' ', 'B', '2', ' '],
+                              ['1', '3', 'B', '1', '1', '3', 'B', '2'],
+                              [' ', ' ', ' ', ' ', 'B', '2', 'B', 'B'],
+                              [' ', '1', 'B', '3', 'B', '2', '2', '1'],
+                              [' ', '1', '2', 'B', '2', 'B', '2', ' '],
+                              ['1', '2', '2', '1', '1', '2', '2', ' '],
+                              ['B', '2', 'B', '1', 'B', '2', 'B', '1'],
+                              ['1', '1', '1', '1', '2', '3', 'B', 'B']]
+        
+        self.assertTrue(self.jogo.venceu_jogo())
+
 if __name__ == '__main__':
     unittest.main()

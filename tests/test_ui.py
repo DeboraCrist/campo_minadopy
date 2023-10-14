@@ -27,6 +27,7 @@ class TestCampoMinadoGUI(unittest.TestCase):
     def teste_perda_jogo_na_segunda_jogada(self):
         self.app.jogo.bombas[0][0] = True
         self.app.clicar_celula(0, 0)
+        self.app.atualizar_interface()
         self.app.jogo.bombas[1][0] = True
         self.app.clicar_celula(1, 0)
         self.assertTrue(self.app.jogo.jogo_encerrado)
