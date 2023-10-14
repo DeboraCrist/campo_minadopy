@@ -40,16 +40,16 @@ class JogoCampoMinadoTabuleiro:
 
     def criar_tabuleiro(self):
         self.botoes = []
-        for i in range(self.jogo.tamanho):
+        for i in range(self.jogo.linhas):
             linha = []
-            for j in range(self.jogo.tamanho):
+            for j in range(self.jogo.colunas):
                 botao = tk.Button(self.master, text='', width=1, height=1, command=lambda x=i, y=j: self.clicar_celula(x, y), font=("Arial", 8))
                 botao.grid(row=i, column=j) 
                 linha.append(botao)
             self.botoes.append(linha)
         
         botoes_frame = tk.Frame(self.master)
-        botoes_frame.grid(row=self.jogo.tamanho, columnspan=self.jogo.tamanho)
+        botoes_frame.grid(row=self.jogo.linhas, columnspan=self.jogo.colunas)
 
         reiniciar_button = ttk.Button(botoes_frame, text="Reiniciar", command=self.reiniciar_jogo)
         reiniciar_button.grid(row=0, column=0)
@@ -64,7 +64,7 @@ class JogoCampoMinadoTabuleiro:
         
         self.num_bandeiras_var = tk.StringVar()
         num_bandeiras_label = ttk.Label(self.master, textvariable=self.num_bandeiras_var, font=("Arial", 12))
-        num_bandeiras_label.grid(row=self.jogo.tamanho + 1, columnspan=self.jogo.tamanho)
+        num_bandeiras_label.grid(row=self.jogo.linhas + 1, columnspan=self.jogo.colunas)
         self.atualizar_num_bandeiras()
         self.num_bandeiras_label = num_bandeiras_label
 
@@ -90,14 +90,14 @@ class JogoCampoMinadoTabuleiro:
                 self.mostrar_fim_de_jogo("Você perdeu!")
 
     def mostrar_fim_de_jogo(self, mensagem):
-        for i in range(self.jogo.tamanho):
-            for j in range(self.jogo.tamanho):
+        for i in range(self.jogo.linhas):
+            for j in range(self.jogo.colunas):
                 self.botoes[i][j].config(state="disabled")
         messagebox.showinfo("Fim de Jogo", mensagem)
 
     def atualizar_interface(self):
-        for i in range(self.jogo.tamanho):
-            for j in range(self.jogo.tamanho):
+        for i in range(self.jogo.linhas):
+            for j in range(self.jogo.colunas):
                 celula = self.jogo.tabuleiro[i][j]
                 botao = self.botoes[i][j]
 
@@ -127,8 +127,8 @@ class JogoCampoMinadoTabuleiro:
         self.jogo = CampoMinado(self.nivel) 
         self.primeira_jogada = True
         self.atualizar_interface()
-        for i in range(self.jogo.tamanho):
-            for j in range(self.jogo.tamanho):
+        for i in range(self.jogo.linhas):
+            for j in range(self.jogo.colunas):
                 self.botoes[i][j].config(text='')
 
     def sair_jogo(self):

@@ -2,7 +2,7 @@ from sys import exit
 from campo_minado import CampoMinado
 
 def main():
-    print("Bem-vindo ao Campo Minado!") #falta
+    print("Bem-vindo ao Campo Minado!")
 
     while True:
         jogo = start_game()
@@ -12,7 +12,7 @@ def main():
             for row in jogo.tabuleiro:
                 print(" ".join(row))
 
-            if primeira_jogada: #falta
+            if primeira_jogada: 
                 acao = input("Escolha uma ação para a primeira jogada (D para descobrir, B para colocar bandeira, Q para sair ou N para reiniciar): ").upper()
             else:
                 acao = input("Escolha uma ação (D para descobrir, B para colocar bandeira, R para remover bandeira, Q para sair ou N para reiniciar): ").upper()
@@ -20,10 +20,10 @@ def main():
             if acao == 'Q':
                 jogo.sair()
                 break
-            elif acao == 'N': #falta
+            elif acao == 'N':
                 print("Reiniciando o jogo.")
                 break
-            elif acao == 'D': #falta
+            elif acao == 'D': 
                 x = int(input("Digite a coordenada X: "))
                 y = int(input("Digite a coordenada Y: "))
                 if primeira_jogada:
@@ -38,7 +38,7 @@ def main():
                     except ValueError as e:
                         print(e)
                         continue
-                if jogo.jogo_encerrado: #falta
+                if jogo.jogo_encerrado: 
                     print("Você perdeu!")
                     jogo.revelar_bombas()
                     for row in jogo.tabuleiro:
@@ -47,7 +47,7 @@ def main():
                         break
                     else:
                         return
-                elif jogo.jogo_vencido: #falta
+                elif jogo.jogo_vencido: 
                     print("Parabéns! Você venceu!")
                     for row in jogo.tabuleiro:
                         print(" ".join(row))
@@ -55,37 +55,37 @@ def main():
                         break
                     else:
                         return
-            elif acao == 'B': #falta
+            elif acao == 'B': 
                 x = int(input("Digite a coordenada X para colocar a bandeira: "))
                 y = int(input("Digite a coordenada Y para colocar a bandeira: "))
                 try:
                     jogo.colocar_bandeira(x, y)
                 except ValueError as e:
                     print(e)
-            elif acao == 'R': #falta
+            elif acao == 'R': 
                 x = int(input("Digite a coordenada X para remover a bandeira: "))
                 y = int(input("Digite a coordenada Y para remover a bandeira: "))
                 jogo.remover_bandeira(x, y)
-            else: #falta
+            else: 
                 print("Ação inválida. Escolha D para descobrir, B para colocar bandeira, R para remover bandeira, N para reiniciar ou Q para sair.")
 
 def play_again():
     while True:
-        choice = input("Deseja jogar novamente? (S para Sim, N para Não): ").strip().lower() #falta
+        choice = input("Deseja jogar novamente? (S para Sim, N para Não): ").strip().lower() 
         if choice == 's':
             return True
         elif choice == 'n':
             return False
         else:
-            print("Opção inválida. Escolha S para Sim ou N para Não.") #falta
+            print("Opção inválida. Escolha S para Sim ou N para Não.") 
 
 def start_game():
-    while True: #falta
+    while True: 
         nivel = input("Escolha o nível de dificuldade (1, 2 ou 3): ")
         if nivel.isdigit() and int(nivel) in CampoMinado.NIVEIS:
             nivel = int(nivel)
             return CampoMinado(nivel)
-        else: #falta
+        else: 
             print("Nível de dificuldade inválido. Escolha 1, 2 ou 3.")
 
 if __name__ == "__main__":

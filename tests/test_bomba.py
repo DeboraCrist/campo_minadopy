@@ -88,8 +88,8 @@ class TestBomba(unittest.TestCase):
         self.assertEqual(self.jogo.jogo_vencido, False)
 
     def test_vencer_jogo_com_bandeira_na_ultima_bomba_corretamente(self):
-        for x in range(self.jogo.tamanho):
-            for y in range(self.jogo.tamanho):
+        for x in range(self.jogo.linhas):
+            for y in range(self.jogo.colunas):
                 if self.jogo.bombas[x][y]:
                     self.jogo.colocar_bandeira(x, y)
         self.jogo.verificar_vitoria()
@@ -113,7 +113,7 @@ class TestBomba(unittest.TestCase):
         self.assertEqual(self.jogo.tabuleiro[0][0], 'F')
 
     def test_vitoria_descobrir_todas_as_zonas_limpo_sem_bombas_adjacentes(self):
-        self.jogo.bombas = [[False] * self.jogo.tamanho for _ in range(self.jogo.tamanho)]
+        self.jogo.bombas = [[False] * self.jogo.linhas for _ in range(self.jogo.colunas)]
         self.jogo.descobrir_zona(0, 0)
         self.jogo.verificar_vitoria()
         self.assertEqual(self.jogo.jogo_vencido, True)

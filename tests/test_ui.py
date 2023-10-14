@@ -32,8 +32,8 @@ class TestCampoMinadoGUI(unittest.TestCase):
         self.assertTrue(self.app.jogo.jogo_encerrado)
 
     def test_vitoria_jogo(self):
-        for x in range(self.app.jogo.tamanho):
-            for y in range(self.app.jogo.tamanho):
+        for x in range(self.app.jogo.linhas):
+            for y in range(self.app.jogo.colunas):
                 if not self.app.jogo.bombas[x][y]:
                     self.app.clicar_celula(x, y)
         self.assertTrue(self.app.jogo.jogo_vencido)
@@ -202,6 +202,7 @@ class TestCampoMinadoGUI(unittest.TestCase):
         except ValueError:
             pass
         self.assertNotIn((0, 0), jogo.bombas)
+
 
     def tearDown(self):
         self.root.destroy()

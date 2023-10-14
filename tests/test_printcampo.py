@@ -3,7 +3,7 @@ from campo_minado import CampoMinado
 from unittest.mock import patch
 from io import StringIO
 
-class TestCampoMinado(unittest.TestCase):
+class TestCampoMinadoPrint(unittest.TestCase):
 
     def setUp(self):
         self.jogo = CampoMinado(1) 
@@ -47,7 +47,7 @@ class TestCampoMinado(unittest.TestCase):
 
     def teste_bandeira_fora_do_tabuleiro_invalida_print(self):
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
-            self.jogo.colocar_bandeira(self.jogo.tamanho + 1, self.jogo.tamanho + 1)  
+            self.jogo.colocar_bandeira(self.jogo.linhas + 1, self.jogo.colunas + 1)  
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Posição fora do tabuleiro.")
 

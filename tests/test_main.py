@@ -1,4 +1,5 @@
 from ast import main
+from io import StringIO
 import unittest
 from unittest.mock import patch
 
@@ -76,6 +77,7 @@ class TestCampoMinado(unittest.TestCase):
             with self.assertRaises(SystemExit) as cm:
                 main()
             self.assertNotEqual(cm.exception.code, None)
+   
 
 if __name__ == '__main__':
     unittest.main()

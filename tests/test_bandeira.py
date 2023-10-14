@@ -36,8 +36,8 @@ class TestBandeira(unittest.TestCase):
         self.assertEqual(self.jogo.bandeiras_colocadas, 0)
 
     def test_colocar_bandeiras_igual_numero_de_bombas(self):    
-        for x in range(self.jogo.tamanho):
-            for y in range(self.jogo.tamanho):
+        for x in range(self.jogo.linhas):
+            for y in range(self.jogo.colunas):
                 if self.jogo.bombas[x][y]:
                     self.jogo.colocar_bandeira(x, y)
         self.assertTrue(self.jogo.jogo_vencido)
@@ -80,8 +80,8 @@ class TestBandeira(unittest.TestCase):
     def test_colocar_bandeiras_menos_que_numero_de_bombas(self):
         self.jogo.inicializar_tabuleiro()
         self.jogo.num_bombas = 8
-        for x in range(self.jogo.tamanho):
-            for y in range(self.jogo.tamanho):
+        for x in range(self.jogo.linhas):
+            for y in range(self.jogo.colunas):
                 if self.jogo.bombas[x][y]:
                     self.jogo.colocar_bandeira(x, y)
         self.assertEqual(self.jogo.bandeiras_colocadas, 8) 
@@ -89,8 +89,8 @@ class TestBandeira(unittest.TestCase):
     def test_colocar_bandeiras_mais_que_numero_de_bombas(self):
         self.jogo.inicializar_tabuleiro()
         self.jogo.num_bombas = 11
-        for x in range(self.jogo.tamanho):
-            for y in range(self.jogo.tamanho):
+        for x in range(self.jogo.linhas):
+            for y in range(self.jogo.colunas):
                 if self.jogo.bombas[x][y]:
                     self.jogo.colocar_bandeira(x, y)
         self.assertEqual(self.jogo.bandeiras_colocadas, 10) 

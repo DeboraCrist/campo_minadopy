@@ -11,24 +11,35 @@ class TestCampoMinado(unittest.TestCase):
     def test_nivel_facil(self):
         self.assertEqual(self.jogo.nivel, 1)
 
-    def test_tamanho_nivel_facil(self):
-        self.assertEqual(self.jogo.tamanho, 8)
+    def test_linhas_nivel_facil(self):
+        self.assertEqual(self.jogo.linhas, 8)
+
+    def test_colunas_nivel_facil(self):
+        self.assertEqual(self.jogo.colunas, 8)
 
     def test_nivel_intermediario(self):
         jogo = CampoMinado(2)
         self.assertEqual(jogo.nivel, 2)
 
-    def test_tamanho_nivel_intermediario(self):
+    def test_linhas_nivel_intermediario(self):
         jogo = CampoMinado(2)
-        self.assertEqual(jogo.tamanho, 10)
+        self.assertEqual(jogo.linhas, 10)
+
+    def test_colunas_nivel_intermediario(self):
+        jogo = CampoMinado(2)
+        self.assertEqual(jogo.colunas, 16)
 
     def test_nivel_dificil(self):
         jogo = CampoMinado(3)
         self.assertEqual(jogo.nivel, 3)
 
-    def test_tamanho_nivel_dificil(self):
+    def test_linhas_nivel_dificil(self):
         jogo = CampoMinado(3)
-        self.assertEqual(jogo.tamanho, 24)
+        self.assertEqual(jogo.linhas, 24)
+
+    def test_colunas_nivel_dificil(self):
+        jogo = CampoMinado(3)
+        self.assertEqual(jogo.colunas, 24)
 
     def test_reiniciar_jogo_vencido(self):
         self.jogo.reiniciar_jogo()
@@ -64,7 +75,7 @@ class TestCampoMinado(unittest.TestCase):
         self.assertEqual(self.jogo.jogo_vencido, False)
 
     def test_reiniciarJogoVencidoComDescoberta(self):
-        self.jogo.tabuleiro = [['-' for _ in range(self.jogo.tamanho)] for _ in range(self.jogo.tamanho)]
+        self.jogo.tabuleiro = [['-' for _ in range(self.jogo.linhas)] for _ in range(self.jogo.colunas)]
         self.jogo.jogo_vencido = True
         self.jogo.descobrir_zona(0, 0)
         self.jogo.reiniciar_jogo()
@@ -150,8 +161,8 @@ class TestCampoMinado(unittest.TestCase):
         self.assertEqual(self.jogo.tabuleiro[1][1], '7')
 
     def test_vencer_jogo(self):
-        for x in range(self.jogo.tamanho):
-            for y in range(self.jogo.tamanho):
+        for x in range(self.jogo.linhas):
+            for y in range(self.jogo.colunas):
                 if not self.jogo.bombas[x][y]:
                     self.jogo.descobrir_zona(x, y)
         self.assertTrue(self.jogo.jogo_vencido)
@@ -163,8 +174,8 @@ class TestCampoMinado(unittest.TestCase):
         self.assertTrue(self.jogo.jogo_encerrado)
 
     def test_descobrir_zona_com_jogo_vencido(self):
-        for x in range(self.jogo.tamanho):
-            for y in range(self.jogo.tamanho):
+        for x in range(self.jogo.linhas):
+            for y in range(self.jogo.colunas):
                 if not self.jogo.bombas[x][y]:
                     self.jogo.descobrir_zona(x, y)
         self.assertTrue(self.jogo.jogo_vencido)
@@ -197,8 +208,8 @@ class TestCampoMinado(unittest.TestCase):
         for _ in range(100):
             x, y = bomb_x, bomb_y
             while x == bomb_x and y == bomb_y:
-                x = random.randint(0, self.jogo.tamanho - 1)
-                y = random.randint(0, self.jogo.tamanho - 1)
+                x = random.randint(0, self.jogo.linhas - 1)
+                y = random.randint(0, self.jogo.colunas - 1)
             self.jogo.realizar_primeira_jogada(x, y)
             if self.jogo.tabuleiro[x][y] != '-':
                 break  
