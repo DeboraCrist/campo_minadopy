@@ -1,3 +1,4 @@
+import datetime
 import random
 import sys
 
@@ -17,6 +18,7 @@ class CampoMinado:
         self.jogo_encerrado = False
         self.jogo_vencido = False
         self.bandeiras_colocadas = 0
+        self.resultados = []  
         self.inicializar_tabuleiro()
 
     def realizar_primeira_jogada(self, x, y):
@@ -146,10 +148,21 @@ class CampoMinado:
         return True
 
     def reiniciar_jogo(self):
+        resultado = {
+            'nivel': self.nivel,
+            'vitoria': not self.jogo_encerrado and self.jogo_vencido,
+            'data': datetime.datetime.now()
+        }
+        self.resultados.append(resultado)
+
         self.inicializar_tabuleiro()
         self.jogo_encerrado = False
         self.jogo_vencido = False
         self.bandeiras_colocadas = 0
+
+
+    def consultar_historico(self):
+        return self.resultados
 
     def sair(self):
         print("Saindo do jogo.")

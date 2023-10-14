@@ -2,7 +2,7 @@ import unittest
 from campo_minado import CampoMinado
 from unittest.mock import patch
 
-class TestCampoMinado(unittest.TestCase):
+class TestReiniciar(unittest.TestCase):
 
     def setUp(self):
         self.jogo = CampoMinado(1) 

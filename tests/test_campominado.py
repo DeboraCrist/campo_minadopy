@@ -1,3 +1,4 @@
+import datetime
 import random
 import unittest
 from campo_minado import CampoMinado
@@ -216,6 +217,7 @@ class TestCampoMinado(unittest.TestCase):
                               ['1', '1', '1', '1', '2', '3', 'B', 'B']]
         
         self.assertTrue(self.jogo.venceu_jogo())
+
 
 if __name__ == '__main__':
     unittest.main()
