@@ -133,7 +133,8 @@ class JogoCampoMinadoTabuleiro:
 
     def sair_jogo(self):
         self.jogo.sair()
-
+        self.master.destroy() 
+       
 if __name__ == "__main__":
     root = tk.Tk()
     app = JogoCampoMinadoGUI(root)

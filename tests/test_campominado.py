@@ -56,14 +56,19 @@ class TestCampoMinado(unittest.TestCase):
         self.jogo.colocar_bandeira(0, 0)
         self.assertNotEqual(self.jogo.tabuleiro[0][0], '-')
 
-    def test_sair_lanca_excecao_system_exit(self):
-        with self.assertRaises(SystemExit):
-            self.jogo.sair()
+    def test_sair_marca_jogo_como_encerrado(self):
+        self.jogo.sair()
+        self.assertTrue(self.jogo.jogo_encerrado)
 
-    def test_sair_codigo_excecao_system_exit_e_nulo(self):
-        with self.assertRaises(SystemExit) as cm:
-            self.jogo.sair()
-        self.assertIsNone(cm.exception.code)
+    def test_sair_nao_afeta_resultados(self):
+        self.jogo.guardar_resultado()  
+        self.jogo.sair()
+        self.assertNotEqual(self.jogo.resultados, [])
+
+    def test_sair_apos_vitoria(self):
+        self.jogo.jogo_vencido = True
+        self.jogo.sair()
+        self.assertTrue(self.jogo.jogo_vencido)
 
     def test_descobrir_vizinhanca_celula_vazia(self):
         self.jogo.bombas = [[False] * 8 for _ in range(8)]

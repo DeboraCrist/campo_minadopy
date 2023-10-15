@@ -1,6 +1,5 @@
 import datetime
 import random
-import sys
 
 class CampoMinado:
     NIVEIS = {
@@ -11,28 +10,28 @@ class CampoMinado:
 
     def __init__(self, nivel):
         self.nivel = nivel
-        self.linhas = 0 
-        self.colunas = 0 
-        self.num_bombas = 0  
-        self.bombas = [[False for _ in range(self.colunas)] for _ in range(self.linhas)]
+        self.linhas = 0
+        self.colunas = 0
+        self.num_bombas = 0
+        self.tabuleiro = []
+        self.bombas = []
         self.jogo_encerrado = False
         self.jogo_vencido = False
         self.bandeiras_colocadas = 0
-        self.resultados = []  
+        self.resultados = []
         self.inicializar_tabuleiro()
 
     def realizar_primeira_jogada(self, x, y):
-        while self.bombas[x][y]:
-            self.inicializar_tabuleiro()
-        self.descobrir_vizinhanca(x, y)
+        if not self.bombas[x][y]:
+            self.descobrir_vizinhanca(x, y)
 
     def inicializar_tabuleiro(self):
         if self.nivel not in self.NIVEIS:
-            raise ValueError("Nível de dificuldade inválido") 
+            raise ValueError("Nível de dificuldade inválido")
 
         nivel_info = self.NIVEIS[self.nivel]
-        self.linhas = nivel_info['linhas']  
-        self.colunas = nivel_info['colunas'] 
+        self.linhas = nivel_info['linhas']
+        self.colunas = nivel_info['colunas']
         self.num_bombas = nivel_info['num_bombas']
 
         self.tabuleiro = [['-' for _ in range(self.colunas)] for _ in range(self.linhas)]
@@ -53,17 +52,15 @@ class CampoMinado:
                 self.descobrir_vizinhanca(x, y)
                 if self.venceu_jogo():
                     self.jogo_vencido = True
-
+            
     def descobrir_vizinhanca(self, x, y):
         if 0 <= x < self.linhas and 0 <= y < self.colunas and self.tabuleiro[x][y] == '-':
             bombas_adjacentes = self.contar_bombas_adjacentes(x, y)
+            self.tabuleiro[x][y] = str(bombas_adjacentes) if bombas_adjacentes > 0 else ' '
             if bombas_adjacentes == 0:
-                self.tabuleiro[x][y] = ' '
                 for dx in [-1, 0, 1]:
                     for dy in [-1, 0, 1]:
                         self.descobrir_vizinhanca(x + dx, y + dy)
-            else:
-                self.tabuleiro[x][y] = str(bombas_adjacentes)
 
     def colocar_bombas(self):
         bombas_restantes = self.num_bombas
@@ -100,7 +97,6 @@ class CampoMinado:
                         count += 1
         return count
 
-
     def revelar_bombas(self):
         for x in range(self.linhas):
             for y in range(self.colunas):
@@ -133,12 +129,14 @@ class CampoMinado:
                     if self.bombas[x][y] and self.tabuleiro[x][y] != 'F':
                         return
             self.jogo_vencido = True
+            self.guardar_resultado()
 
     def remover_bandeira(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
             if 0 <= x < self.linhas and 0 <= y < self.colunas and self.tabuleiro[x][y] == 'F':
                 self.tabuleiro[x][y] = '-'
                 self.bandeiras_colocadas -= 1
+                self.guardar_resultado()
 
     def venceu_jogo(self):
         for x in range(self.linhas):
@@ -148,21 +146,36 @@ class CampoMinado:
         return True
 
     def reiniciar_jogo(self):
-        resultado = {
-            'nivel': self.nivel,
-            'vitoria': not self.jogo_encerrado and self.jogo_vencido,
-            'data': datetime.datetime.now()
-        }
-        self.resultados.append(resultado)
-
         self.inicializar_tabuleiro()
         self.jogo_encerrado = False
         self.jogo_vencido = False
         self.bandeiras_colocadas = 0
 
-    def consultar_historico(self):
+    def guardar_resultado(self):
+        if self.jogo_vencido:
+            resultado = "Vitória"
+        elif self.jogo_encerrado:
+            resultado = "Derrota"
+        else:
+            resultado = "Jogo não encerrado"
+
+        data_hora = datetime.datetime.now()
+        resultado_str = f"Data e Hora: {data_hora}\nNível: {self.nivel}\nResultado: {resultado}\n"
+        self.resultados.append(resultado_str)
+
+    def obter_resultados(self):
         return self.resultados
+    
+    def verificar_resultados(self):
+        if not self.resultados:
+            return "Nenhum resultado disponível."
+        else:
+            result_string = "Resultados obtidos:\n"
+            for i, resultado in enumerate(self.resultados, 1):
+                result_string += f"Resultado {i}:\n{resultado}\n"
+            return result_string
 
     def sair(self):
         print("Saindo do jogo.")
-        sys.exit()
+        self.jogo_encerrado = True
+        

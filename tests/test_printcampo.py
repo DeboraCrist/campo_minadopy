@@ -10,8 +10,7 @@ class TestCampoMinadoPrint(unittest.TestCase):
 
     def test_sair_imprime_mensagem_de_saindo(self):
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
-            with self.assertRaises(SystemExit):
-                self.jogo.sair()
+            self.jogo.sair()
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Saindo do jogo.")
 

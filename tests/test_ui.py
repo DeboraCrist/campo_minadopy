@@ -56,9 +56,6 @@ class TestCampoMinadoGUI(unittest.TestCase):
         self.app.reiniciar_jogo()
         self.assertEqual(self.app.botoes[0][0]['state'], 'active')
 
-    def test_sair_jogo(self):
-        with self.assertRaises(SystemExit):
-            self.app.sair_jogo()
     
     def test_botao_clicado_depois_da_vitoria(self):
         self.app.jogo.jogo_vencido = True

@@ -1,0 +1,150 @@
+Data e Hora: 2023-10-14 22:02:10.949531
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.337740
+Nível: 1
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:11.340971
+Nível: 1
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:11.342693
+Nível: 1
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:11.344002
+Nível: 1
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:11.367691
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.368115
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.382511
+Nível: 1
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:11.385576
+Nível: 1
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:11.386457
+Nível: 2
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:11.387766
+Nível: 3
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:11.388654
+Nível: 1
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:11.389321
+Nível: 2
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:11.390089
+Nível: 3
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:11.390591
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.391379
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.392071
+Nível: 2
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.392812
+Nível: 3
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.393343
+Nível: 1
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:11.393958
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.394737
+Nível: 2
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.395928
+Nível: 3
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.397187
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.397391
+Nível: 1
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:11.397491
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.398836
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.399438
+Nível: 1
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:11.399627
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:11.401012
+Nível: 1
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:35.900485
+Nível: 1
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:35.902310
+Nível: 2
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:35.903199
+Nível: 3
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:35.903795
+Nível: 1
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:35.904370
+Nível: 2
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:35.905151
+Nível: 3
+Resultado: Jogo não encerrado
+Data e Hora: 2023-10-14 22:02:35.905682
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.906230
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.906950
+Nível: 2
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.907727
+Nível: 3
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.908335
+Nível: 1
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:35.909128
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.910027
+Nível: 2
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.910861
+Nível: 3
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.912136
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.912379
+Nível: 1
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:35.912510
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.913178
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.913301
+Nível: 1
+Resultado: Derrota
+Data e Hora: 2023-10-14 22:02:35.913361
+Nível: 1
+Resultado: Vitória
+Data e Hora: 2023-10-14 22:02:35.913833
+Nível: 1
+Resultado: Jogo não encerrado

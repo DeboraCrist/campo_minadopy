@@ -19,7 +19,7 @@ def main():
 
             if acao == 'Q':
                 jogo.sair()
-                break
+                return  
             elif acao == 'N':
                 print("Reiniciando o jogo.")
                 break
@@ -62,7 +62,7 @@ def main():
                     jogo.colocar_bandeira(x, y)
                 except ValueError as e:
                     print(e)
-            elif acao == 'R': 
+            elif acao == 'R':
                 x = int(input("Digite a coordenada X para remover a bandeira: "))
                 y = int(input("Digite a coordenada Y para remover a bandeira: "))
                 jogo.remover_bandeira(x, y)
@@ -77,7 +77,7 @@ def play_again():
         elif choice == 'n':
             return False
         else:
-            print("Opção inválida. Escolha S para Sim ou N para Não.") 
+            print("Opção inválida. Escolha S para Sim ou N para Não.")
 
 def start_game():
     while True: 
@@ -90,3 +90,4 @@ def start_game():
 
 if __name__ == "__main__":
     main()
+
