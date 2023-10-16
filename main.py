@@ -1,4 +1,3 @@
-from sys import exit
 from campo_minado import CampoMinado
 
 def main():
@@ -45,7 +44,9 @@ def main():
                     jogo.revelar_bombas()
                     for row in jogo.tabuleiro:
                         print(" ".join(row))
-                    jogo.guardar_resultado()
+                    score = jogo.calcular_pontuacao()
+                    print(score) 
+                    jogo.guardar_resultado(score)  
                     if play_again():
                         break
                     else:
@@ -54,7 +55,9 @@ def main():
                     print("Parabéns! Você venceu!")
                     for row in jogo.tabuleiro:
                         print(" ".join(row))
-                    jogo.guardar_resultado()
+                    score = jogo.calcular_pontuacao()
+                    print(score) 
+                    jogo.guardar_resultado(score)  
                     if play_again():
                         break
                     else:
@@ -101,7 +104,5 @@ def exibir_historico():
     except FileNotFoundError:
         print("Nenhum histórico disponível.")
 
-
 if __name__ == "__main__":
     main()
-

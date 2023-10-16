@@ -19,11 +19,14 @@ class CampoMinado:
         self.jogo_vencido = False
         self.bandeiras_colocadas = 0
         self.resultados = []
+        self.end_time = None
+        self.start_time = datetime.datetime.now() 
         self.inicializar_tabuleiro()
 
     def realizar_primeira_jogada(self, x, y):
         if not self.bombas[x][y]:
             self.descobrir_vizinhanca(x, y)
+            self.start_time = datetime.datetime.now()
 
     def inicializar_tabuleiro(self):
         if self.nivel not in self.NIVEIS:
@@ -128,8 +131,9 @@ class CampoMinado:
                 for y in range(self.colunas):
                     if self.bombas[x][y] and self.tabuleiro[x][y] != 'F':
                         return
+            self.end_time = datetime.datetime.now()
             self.jogo_vencido = True
-            self.guardar_resultado()
+            self.calcular_pontuacao()
 
     def remover_bandeira(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
@@ -150,12 +154,14 @@ class CampoMinado:
         self.jogo_encerrado = False
         self.jogo_vencido = False
         self.bandeiras_colocadas = 0
-
-    def guardar_resultado(self):
+        self.start_time = None
+        self.end_time = None
+        
+    def guardar_resultado(self, score=""):
         if self.jogo_vencido:
-            resultado = "Vitória"
+            resultado = f"Vitória\n{score}"
         elif self.jogo_encerrado:
-            resultado = "Derrota"
+            resultado = f"Derrota\n{score}"
         else:
             resultado = "Jogo não encerrado"
 
@@ -163,7 +169,7 @@ class CampoMinado:
         resultado_str = f"Data e Hora: {data_hora}\nNível: {self.nivel}\nResultado: {resultado}\n"
 
         with open('historico.txt', 'a') as arquivo:
-            arquivo.write(resultado_str)
+            arquivo.write(resultado_str + "\n")
 
     def obter_resultados(self):
         return self.resultados
@@ -171,4 +177,14 @@ class CampoMinado:
     def sair(self):
         print("Saindo do jogo.")
         self.jogo_encerrado = True
-        
+
+    def calcular_pontuacao(self):
+        end_time = datetime.datetime.now()
+        time_taken = (end_time - self.start_time).total_seconds()
+        if self.jogo_vencido:
+            score = f"Você venceu em {time_taken:.2f} segundos."
+        else:
+            score = f"Você perdeu em {time_taken:.2f} segundos."
+
+        return score
+

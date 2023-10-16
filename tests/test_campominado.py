@@ -1,5 +1,7 @@
+import datetime
 import io
 import random
+import sys
 import unittest
 from campo_minado import CampoMinado
 from unittest.mock import patch
