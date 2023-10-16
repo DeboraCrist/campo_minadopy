@@ -1,4 +1,4 @@
-import datetime
+import io
 import random
 import unittest
 from campo_minado import CampoMinado
@@ -61,9 +61,21 @@ class TestCampoMinado(unittest.TestCase):
         self.assertTrue(self.jogo.jogo_encerrado)
 
     def test_sair_nao_afeta_resultados(self):
-        self.jogo.guardar_resultado()  
-        self.jogo.sair()
-        self.assertNotEqual(self.jogo.resultados, [])
+        self.jogo.descobrir_zona(0, 0)
+        self.jogo.colocar_bandeira(1, 1)
+        self.jogo.descobrir_zona(2, 2)
+        estado_anterior = self.jogo.tabuleiro
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            self.jogo.sair()
+            self.assertEqual(self.jogo.tabuleiro, estado_anterior)
+
+    def test_sair_nao_afeta_resultados_print(self):
+        self.jogo.descobrir_zona(0, 0)
+        self.jogo.colocar_bandeira(1, 1)
+        self.jogo.descobrir_zona(2, 2)
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            self.jogo.sair()
+            self.assertEqual(mock_stdout.getvalue().strip(), "Saindo do jogo.")
 
     def test_sair_apos_vitoria(self):
         self.jogo.jogo_vencido = True

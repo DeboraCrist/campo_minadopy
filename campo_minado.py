@@ -161,19 +161,12 @@ class CampoMinado:
 
         data_hora = datetime.datetime.now()
         resultado_str = f"Data e Hora: {data_hora}\nNível: {self.nivel}\nResultado: {resultado}\n"
-        self.resultados.append(resultado_str)
+
+        with open('historico.txt', 'a') as arquivo:
+            arquivo.write(resultado_str)
 
     def obter_resultados(self):
         return self.resultados
-    
-    def verificar_resultados(self):
-        if not self.resultados:
-            return "Nenhum resultado disponível."
-        else:
-            result_string = "Resultados obtidos:\n"
-            for i, resultado in enumerate(self.resultados, 1):
-                result_string += f"Resultado {i}:\n{resultado}\n"
-            return result_string
 
     def sair(self):
         print("Saindo do jogo.")

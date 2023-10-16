@@ -1,97 +1,111 @@
+import io
 import unittest
+
+from mock import patch
 from campo_minado import CampoMinado  
 class TesteHistoricoCampoMinado(unittest.TestCase):
     
     def setUp(self):
         self.jogo = CampoMinado(1) 
+
+    def test_historico_inicial_vazio(self):
+        self.assertEqual(len(self.jogo.resultados), 0)
+
+    def test_historico_inicial_vazio_nivel2(self):
+        jogo = CampoMinado(2) 
+        self.assertEqual(len(jogo.resultados), 0)
     
-    def test_historico_apos_vitoria(self):
-        jogo = CampoMinado(1)
-        jogo.jogo_vencido = True
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
+    def test_historico_inicial_vazio_nivel3(self):
+        jogo = CampoMinado(3) 
+        self.assertEqual(len(jogo.resultados), 0)
 
-    def test_historico_apos_vitoria_nivel2(self):
-        jogo = CampoMinado(2)
-        jogo.jogo_vencido = True
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
-    
-    def test_historico_apos_vitoria_nivel3(self):
-        jogo = CampoMinado(3)
-        jogo.jogo_vencido = True
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
+    def test_guardar_resultados(self):
+        self.jogo.jogo_vencido = True
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            self.jogo.guardar_resultado()
+            with open('historico.txt', 'r') as arquivo:
+                resultado_gravado = arquivo.read()
+            self.assertIn("Vitória", resultado_gravado)
 
-    def test_historico_apos_derrota(self):
-        jogo = CampoMinado(1)
-        jogo.jogo_encerrado = True
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
+    def test_guardar_resultado_mensagem_saida(self):
+        self.jogo.jogo_vencido = True
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            self.jogo.guardar_resultado()
+            self.assertEqual(mock_stdout.getvalue().strip(), "")
 
-    def test_historico_apos_derrota_nivel2(self):
-        jogo = CampoMinado(2)
-        jogo.jogo_encerrado = True
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
+    def test_guardar_resultado_derrota(self):
+        self.jogo.jogo_encerrado = True
+        with patch('sys.stdout', new_callable=io.StringIO):
+            self.jogo.guardar_resultado()
+        with open('historico.txt', 'r') as arquivo:
+            resultado_gravado = arquivo.read()
+        self.assertIn("Derrota", resultado_gravado)
 
-    def test_historico_apos_derrota_nivel3(self):
-        jogo = CampoMinado(3)
-        jogo.jogo_encerrado = True
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
+    def test_guardar_resultado_jogo_nao_encerrado(self):
+        self.jogo.jogo_vencido = False
+        self.jogo.jogo_encerrado = False
+        with patch('sys.stdout', new_callable=io.StringIO):
+            self.jogo.guardar_resultado()
+        with open('historico.txt', 'r') as arquivo:
+            resultado_gravado = arquivo.read()
+        self.assertIn("Jogo não encerrado", resultado_gravado)
 
-    def test_historico_apos_jogo_nao_encerrado(self):
-        jogo = CampoMinado(1)
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
+    def test_guardar_resultado_mensagem_saida_nao_vazia(self):
+        self.jogo.jogo_vencido = True
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            print("Isso é um teste")
+            self.jogo.guardar_resultado()
+        self.assertEqual(mock_stdout.getvalue().strip(), "Isso é um teste")
 
-    def test_historico_apos_jogo_nao_encerrado_nivel2(self):
-        jogo = CampoMinado(2)
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
+    def test_guardar_resultado_nivel2(self):
+        campo_minado = CampoMinado(2)
+        campo_minado.jogo_vencido = True
+        with patch('sys.stdout', new_callable=io.StringIO):
+            campo_minado.guardar_resultado()
+        with open('historico.txt', 'r') as arquivo:
+            resultado_gravado = arquivo.read()
+        self.assertIn("Nível: 2", resultado_gravado)
 
-    def test_historico_apos_jogo_nao_encerrado_nivel3(self):
-        jogo = CampoMinado(3)
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
+    def test_guardar_resultado_nivel3(self):
+        campo_minado = CampoMinado(3)
+        campo_minado.jogo_vencido = True
+        with patch('sys.stdout', new_callable=io.StringIO):
+            campo_minado.guardar_resultado()
+        with open('historico.txt', 'r') as arquivo:
+            resultado_gravado = arquivo.read()
+        self.assertIn("Nível: 3", resultado_gravado)
 
-    def test_historico_conteudo_vitoria(self):
-        jogo = CampoMinado(1)
-        jogo.jogo_vencido = True
-        jogo.guardar_resultado()
-        resultado_esperado = "Vitória"
-        self.assertIn(resultado_esperado, jogo.resultados[0])
+    def test_guardar_resultado_vitoria_outra_data(self):
+        self.jogo.jogo_vencido = True
+        with patch('sys.stdout', new_callable=io.StringIO):
+           self.jogo.guardar_resultado()
+        with open('historico.txt', 'r') as arquivo:
+            resultado_gravado = arquivo.read()
+        self.assertIn("Data e Hora:", resultado_gravado)
 
-    def test_historico_conteudo_vitoria_nivel2(self):
-        jogo = CampoMinado(2)
-        jogo.jogo_vencido = True
-        jogo.guardar_resultado()
-        resultado_esperado = "Vitória"
-        self.assertIn(resultado_esperado, jogo.resultados[0])
-
-    def test_historico_conteudo_vitoria_nivel3(self):
-        jogo = CampoMinado(3)
-        jogo.jogo_vencido = True
-        jogo.guardar_resultado()
-        resultado_esperado = "Vitória"
-        self.assertIn(resultado_esperado, jogo.resultados[0])
-
-    def test_historico_conteudo_derrota(self):
-        jogo = CampoMinado(1)
-        jogo.reiniciar_jogo()
-        jogo.jogo_encerrado = True
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
-        resultado_esperado = "Derrota"
-        self.assertIn(resultado_esperado, jogo.resultados[0])
-
-    def test_historico_apos_jogo_nao_encerrado(self):
-        jogo = CampoMinado(1)
-        jogo.guardar_resultado()
-        self.assertEqual(len(jogo.resultados), 1)
-        resultado_esperado = "Jogo não encerrado"
-        self.assertIn(resultado_esperado, jogo.resultados[0])
+    def test_guardar_resultado_anterior_vitoria(self):
+        self.jogo.jogo_vencido = True
+        with patch('sys.stdout', new_callable=io.StringIO):
+            self.jogo.guardar_resultado()
+        campo_minado = CampoMinado(2)
+        campo_minado.jogo_encerrado = True
+        with patch('sys.stdout', new_callable=io.StringIO):
+            campo_minado.guardar_resultado()
+        with open('historico.txt', 'r') as arquivo:
+            resultado_gravado = arquivo.read()
+        self.assertIn("Vitória", resultado_gravado)
+        
+    def test_guardar_resultado_anterior_derrota(self):
+        self.jogo.jogo_vencido = True
+        with patch('sys.stdout', new_callable=io.StringIO):
+            self.jogo.guardar_resultado()
+        campo_minado = CampoMinado(2)
+        campo_minado.jogo_encerrado = True
+        with patch('sys.stdout', new_callable=io.StringIO):
+            campo_minado.guardar_resultado()
+        with open('historico.txt', 'r') as arquivo:
+            resultado_gravado = arquivo.read()
+        self.assertIn("Derrota", resultado_gravado)
 
     def test_historico_multiplas_partidas(self):
         self.jogo.jogo_vencido = True
@@ -104,47 +118,6 @@ class TesteHistoricoCampoMinado(unittest.TestCase):
         self.jogo.reiniciar_jogo()
         self.jogo.jogo_vencido = True
         self.jogo.guardar_resultado()
-
-        self.assertEqual(len(self.jogo.resultados), 3)
-
-    def test_historico_multiplas_partidas_DerrotaouVitoria(self):
-        jogo = CampoMinado(1)
-        jogo.jogo_vencido = True
-        jogo.guardar_resultado()
-
-        jogo.reiniciar_jogo()
-        jogo.jogo_encerrado = True
-        jogo.guardar_resultado()
-
-        jogo.reiniciar_jogo()
-        jogo.jogo_vencido = True
-        jogo.guardar_resultado()
-
-        resultados_esperados = ["Vitória", "Derrota", "Vitória"]
-        for resultado in resultados_esperados:
-            encontrado = False
-            for registro in jogo.resultados:
-                if resultado in registro:
-                    encontrado = True
-                    break
-            self.assertTrue(encontrado, f"Resultado '{resultado}' não encontrado nos registros.")
-
-    def test_historico_apos_reiniciar(self):
-        jogo = CampoMinado(1)
-        jogo.jogo_vencido = True
-        jogo.guardar_resultado()
-        jogo.reiniciar_jogo()
-        self.assertEqual(len(jogo.resultados), 1, "O histórico não foi limpo após reiniciar o jogo.")
-
-    def test_historico_inicial_vazio(self):
-        jogo = CampoMinado(1)
-        self.assertEqual(len(jogo.resultados), 0)
-
-    def test_historico_nao_limpo_apos_sair(self):
-        jogo = CampoMinado(1)
-        jogo.guardar_resultado()
-        jogo.sair()
-        self.assertEqual(len(jogo.resultados), 1)
 
     def test_obter_resultados(self):
         jogo = CampoMinado(nivel=1)
@@ -186,22 +159,6 @@ class TesteHistoricoCampoMinado(unittest.TestCase):
 
         results = jogo.obter_resultados()
         self.assertEqual(results, [resultado1, resultado2, resultado3])
-
-    def test_verificar_resultados_no_results(self):
-        expected_output = "Nenhum resultado disponível."
-        with self.subTest():
-            self.assertEqual(self.jogo.verificar_resultados(), expected_output)
-
-    def test_verificar_resultados_with_results(self):
-        self.jogo.guardar_resultado()
-        self.jogo.guardar_resultado()
-        expected_output = "Resultados obtidos:\nResultado 1:\n"
-        expected_output += "Resultado 2:\n"
-
-        with self.subTest():
-            actual_output = self.jogo.verificar_resultados()
-            for substring in expected_output.split('\n'):
-                self.assertIn(substring, actual_output)
 
 
 if __name__ == '__main__':

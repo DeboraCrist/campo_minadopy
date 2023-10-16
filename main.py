@@ -13,9 +13,9 @@ def main():
                 print(" ".join(row))
 
             if primeira_jogada: 
-                acao = input("Escolha uma ação para a primeira jogada (D para descobrir, B para colocar bandeira, Q para sair ou N para reiniciar): ").upper()
+                acao = input("Escolha uma ação para a primeira jogada (D para descobrir, B para colocar bandeira, H para histórico, Q para sair ou N para reiniciar): ").upper()
             else:
-                acao = input("Escolha uma ação (D para descobrir, B para colocar bandeira, R para remover bandeira, Q para sair ou N para reiniciar): ").upper()
+                acao = input("Escolha uma ação (D para descobrir, B para colocar bandeira, R para remover bandeira, H para histórico, Q para sair ou N para reiniciar): ").upper()
 
             if acao == 'Q':
                 jogo.sair()
@@ -23,6 +23,8 @@ def main():
             elif acao == 'N':
                 print("Reiniciando o jogo.")
                 break
+            elif acao == 'H':
+                exibir_historico()
             elif acao == 'D': 
                 x = int(input("Digite a coordenada X: "))
                 y = int(input("Digite a coordenada Y: "))
@@ -43,6 +45,7 @@ def main():
                     jogo.revelar_bombas()
                     for row in jogo.tabuleiro:
                         print(" ".join(row))
+                    jogo.guardar_resultado()
                     if play_again():
                         break
                     else:
@@ -51,6 +54,7 @@ def main():
                     print("Parabéns! Você venceu!")
                     for row in jogo.tabuleiro:
                         print(" ".join(row))
+                    jogo.guardar_resultado()
                     if play_again():
                         break
                     else:
@@ -67,7 +71,7 @@ def main():
                 y = int(input("Digite a coordenada Y para remover a bandeira: "))
                 jogo.remover_bandeira(x, y)
             else: 
-                print("Ação inválida. Escolha D para descobrir, B para colocar bandeira, R para remover bandeira, N para reiniciar ou Q para sair.")
+                print("Ação inválida. Escolha D para descobrir, B para colocar bandeira, R para remover bandeira, H para histórico, N para reiniciar ou Q para sair.")
 
 def play_again():
     while True:
@@ -87,6 +91,15 @@ def start_game():
             return CampoMinado(nivel)
         else: 
             print("Nível de dificuldade inválido. Escolha 1, 2 ou 3.")
+
+def exibir_historico():
+    try:
+        with open('historico.txt', 'r') as arquivo:
+            historico = arquivo.read()
+            print("Histórico de Partidas:\n")
+            print(historico)
+    except FileNotFoundError:
+        print("Nenhum histórico disponível.")
 
 if __name__ == "__main__":
     main()
