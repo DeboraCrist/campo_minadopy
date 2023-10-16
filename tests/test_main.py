@@ -1,9 +1,11 @@
 from ast import main
 from io import StringIO
+import io
 import unittest
 from unittest.mock import patch
+from campo_minado import CampoMinado
 
-from main import play_again
+from main import exibir_historico, play_again, start_game
 
 class TestCampoMinado(unittest.TestCase):
     
@@ -77,7 +79,21 @@ class TestCampoMinado(unittest.TestCase):
             with self.assertRaises(SystemExit) as cm:
                 main()
             self.assertNotEqual(cm.exception.code, None)
-   
+    
+    def test_exibir_historico_existente(self):
+        with open('historico.txt', 'w') as arquivo:
+            arquivo.write("Jogo 1: Vitória\nJogo 2: Derrota")
+        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            exibir_historico()
+            output = mock_stdout.getvalue()
+        self.assertEqual(output, "Histórico de Partidas:\n\nJogo 1: Vitória\nJogo 2: Derrota\n")
+
+    def test_exibir_historico_inexistente(self):
+        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            exibir_historico()
+            output = mock_stdout.getvalue()
+        self.assertNotEqual(output, "Nenhum histórico disponível.\n")
+
 
 if __name__ == '__main__':
     unittest.main()

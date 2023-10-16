@@ -101,6 +101,7 @@ def exibir_historico():
     except FileNotFoundError:
         print("Nenhum histórico disponível.")
 
+
 if __name__ == "__main__":
     main()
 

@@ -20,6 +20,28 @@ class JogoCampoMinadoGUI:
 
         iniciar_button = ttk.Button(self.master, text="Iniciar Jogo", command=self.iniciar_jogo)
         iniciar_button.pack(pady=10)
+        historico_button = ttk.Button(self.master, text="Histórico", command=self.exibir_historico)
+        historico_button.pack(pady=10)
+
+    def exibir_historico(self):
+        try:
+            with open('historico.txt', 'r') as arquivo:
+                historico = arquivo.readlines()
+                historico.reverse()  
+                historico = "".join(historico) 
+                self.mostrar_janela_historico(historico)
+        except FileNotFoundError:
+            messagebox.showinfo("Histórico", "Nenhum histórico disponível.")
+
+
+    def mostrar_janela_historico(self, historico):
+        historico_window = tk.Toplevel(self.master)
+        historico_window.title("Histórico de Partidas")
+
+        historico_text = tk.Text(historico_window, wrap=tk.WORD, width=40, height=10)
+        historico_text.pack(padx=10, pady=10)
+        historico_text.insert(tk.END, historico)
+
 
     def iniciar_jogo(self):
         nivel = int(self.nivel_var.get())
@@ -88,6 +110,7 @@ class JogoCampoMinadoTabuleiro:
                 self.mostrar_fim_de_jogo("Parabéns! Você venceu!")
             elif self.jogo.jogo_encerrado:
                 self.mostrar_fim_de_jogo("Você perdeu!")
+            self.jogo.guardar_resultado()
 
     def mostrar_fim_de_jogo(self, mensagem):
         for i in range(self.jogo.linhas):

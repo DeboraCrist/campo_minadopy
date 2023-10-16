@@ -200,10 +200,10 @@ class TestCampoMinadoGUI(unittest.TestCase):
         except ValueError:
             pass
         self.assertNotIn((0, 0), jogo.bombas)
-
-
+    
     def tearDown(self):
         self.root.destroy()
+
 
 if __name__ == "__main__":
     unittest.main()
