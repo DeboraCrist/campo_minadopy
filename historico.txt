@@ -1,293 +1,53 @@
 Jogo 1: Vitória
-Jogo 2: DerrotaData e Hora: 2023-10-16 19:23:43.754448
-Nível: 1
-Resultado: Vitória
-
-
-Data e Hora: 2023-10-16 19:23:45.450168
-Nível: 1
-Resultado: Vitória
-
-
-Data e Hora: 2023-10-16 19:23:48.964168
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:49.173788
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:49.397461
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:49.398929
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:49.399708
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:49.400309
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:49.401017
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:49.622446
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:49.849351
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:50.062678
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.504360
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.712183
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.714159
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.924189
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.924843
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.925364
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.926046
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.926589
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.927135
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.927639
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.928143
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.928730
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.929661
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.931345
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.932801
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.933657
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.934973
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.936096
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.936761
-Nível: 1
-Resultado: Jogo não encerrado
+Jogo 2: DerrotaTest game result
 
-Data e Hora: 2023-10-16 19:23:52.937293
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.937824
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.938921
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.940018
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.940714
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.941217
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.941721
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.942740
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.943821
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.944580
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.945475
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.947495
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.949350
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.950312
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.950896
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.952019
-Nível: 1
-Resultado: Jogo não encerrado
+Pontuação: 2.00 segundos
+Test game result
 
-Data e Hora: 2023-10-16 19:23:52.952710
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.953255
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.954360
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.955495
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.956479
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.956968
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.957461
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.957926
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.958392
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.958845
-Nível: 1
-Resultado: Jogo não encerrado
-
-Data e Hora: 2023-10-16 19:23:52.959296
-Nível: 1
-Resultado: Jogo não encerrado
+Pontuação: 2.00 segundos
+Parabéns! Você venceu!
 
-Data e Hora: 2023-10-16 19:23:52.959766
-Nível: 1
-Resultado: Jogo não encerrado
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
 
-Data e Hora: 2023-10-16 19:23:52.960239
-Nível: 1
-Resultado: Jogo não encerrado
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
 
-Data e Hora: 2023-10-16 19:23:52.960772
-Nível: 1
-Resultado: Jogo não encerrado
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
 
-Data e Hora: 2023-10-16 19:23:52.961467
-Nível: 1
-Resultado: Jogo não encerrado
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
 
-Data e Hora: 2023-10-16 19:23:52.962430
-Nível: 1
-Resultado: Jogo não encerrado
+Pontuação: 8.00 segundos
+Parabéns! Você venceu!
 
-Data e Hora: 2023-10-16 19:23:52.963359
-Nível: 1
-Resultado: Jogo não encerrado
+Pontuação: 2.00 segundos
+Você perdeu!
 
-Data e Hora: 2023-10-16 19:23:52.964703
+Pontuação: 0.00 segundos
+Data e Hora: 2023-10-16 23:57:52.942009
 Nível: 1
-Resultado: Jogo não encerrado
+Resultado: Derrota
 
-Data e Hora: 2023-10-16 19:23:52.965722
-Nível: 1
-Resultado: Jogo não encerrado
 
-Data e Hora: 2023-10-16 19:23:52.966467
-Nível: 1
-Resultado: Jogo não encerrado
+Você perdeu!
 
-Data e Hora: 2023-10-16 19:23:54.767314
+Pontuação: 3.00 segundos
+Data e Hora: 2023-10-16 23:58:25.911774
 Nível: 1
-Resultado: Vitória
-
+Resultado: Derrota
 
-Data e Hora: 2023-10-16 19:23:55.438137
-Nível: 1
-Resultado: Vitória
 
+Você perdeu!
 
-Data e Hora: 2023-10-16 19:23:55.794751
+Pontuação: 2.00 segundos
+Data e Hora: 2023-10-16 23:58:31.940696
 Nível: 1
-Resultado: Jogo não encerrado
+Resultado: Derrota
 
-Data e Hora: 2023-10-16 19:23:56.062058
-Nível: 1
-Resultado: Jogo não encerrado
 
-Data e Hora: 2023-10-16 19:23:56.989296
+Data e Hora: 2023-10-16 23:59:02.877962
 Nível: 1
 Resultado: Derrota
 

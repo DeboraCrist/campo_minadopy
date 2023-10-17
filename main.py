@@ -11,7 +11,7 @@ def main():
             for row in jogo.tabuleiro:
                 print(" ".join(row))
 
-            if primeira_jogada: 
+            if primeira_jogada:
                 acao = input("Escolha uma ação para a primeira jogada (D para descobrir, B para colocar bandeira, H para histórico, Q para sair ou N para reiniciar): ").upper()
             else:
                 acao = input("Escolha uma ação (D para descobrir, B para colocar bandeira, R para remover bandeira, H para histórico, Q para sair ou N para reiniciar): ").upper()
@@ -39,14 +39,13 @@ def main():
                     except ValueError as e:
                         print(e)
                         continue
+
                 if jogo.jogo_encerrado: 
                     print("Você perdeu!")
                     jogo.revelar_bombas()
                     for row in jogo.tabuleiro:
                         print(" ".join(row))
-                    score = jogo.calcular_pontuacao()
-                    print(score) 
-                    jogo.guardar_resultado(score)  
+                    jogo.guardar_resultado()  
                     if play_again():
                         break
                     else:
@@ -55,9 +54,7 @@ def main():
                     print("Parabéns! Você venceu!")
                     for row in jogo.tabuleiro:
                         print(" ".join(row))
-                    score = jogo.calcular_pontuacao()
-                    print(score) 
-                    jogo.guardar_resultado(score)  
+                    jogo.guardar_resultado()  
                     if play_again():
                         break
                     else:

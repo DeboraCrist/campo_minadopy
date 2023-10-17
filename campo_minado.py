@@ -133,7 +133,6 @@ class CampoMinado:
                         return
             self.end_time = datetime.datetime.now()
             self.jogo_vencido = True
-            self.calcular_pontuacao()
 
     def remover_bandeira(self, x, y):
         if not self.jogo_encerrado and not self.jogo_vencido:
@@ -177,14 +176,4 @@ class CampoMinado:
     def sair(self):
         print("Saindo do jogo.")
         self.jogo_encerrado = True
-
-    def calcular_pontuacao(self):
-        end_time = datetime.datetime.now()
-        time_taken = (end_time - self.start_time).total_seconds()
-        if self.jogo_vencido:
-            score = f"Você venceu em {time_taken:.2f} segundos."
-        else:
-            score = f"Você perdeu em {time_taken:.2f} segundos."
-
-        return score
 
