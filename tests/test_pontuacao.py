@@ -1,7 +1,7 @@
 import unittest
 import time
 import tkinter as tk
-from UI import JogoCampoMinadoTabuleiro  # Replace with your actual script name
+from UI import JogoCampoMinadoTabuleiro 
 
 class TestCampoMinadoHistorico(unittest.TestCase):
     def setUp(self):

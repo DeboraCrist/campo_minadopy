@@ -1,13 +1,28 @@
 from ast import main
 from io import StringIO
 import io
+import time
 import unittest
 from unittest.mock import patch
+
+import pyautogui
 from campo_minado import CampoMinado
 
 from main import exibir_historico, play_again, start_game
 
 class TestCampoMinado(unittest.TestCase):
+
+    def test_estado_inicial_vencido(self):
+        jogo = CampoMinado(1)
+        self.assertEqual(jogo.jogo_vencido, False)
+
+    def test_estado_inicial_vencido_nivel2(self):
+        jogo = CampoMinado(2)
+        self.assertEqual(jogo.jogo_vencido, False)
+
+    def test_estado_inicial_vencido_nivel3(self):
+        jogo = CampoMinado(3)
+        self.assertEqual(jogo.jogo_vencido, False)
     
     @patch('builtins.input', side_effect=['1', 'N', 'Q'])
     def test_main_quit_nivel1(self, mock_input):
@@ -120,6 +135,24 @@ class TestCampoMinado(unittest.TestCase):
             jogo.realizar_primeira_jogada(3, 3)
         except ValueError:
             self.fail("Coordenadas válidas geraram exceção")
+
+    def test_clicar_celula_vazia(self):
+        app_janela_x = 100  
+        app_janela_y = 100
+        pyautogui.click(app_janela_x, app_janela_y)
+
+        x, y = 100, 100 
+        pyautogui.click(x, y)
+        time.sleep(1)  
+
+    def test_clicar_bandeira(self):
+        app_janela_x = 100  
+        app_janela_y = 100
+        pyautogui.click(app_janela_x, app_janela_y)
+
+        x, y = 200, 200  
+        pyautogui.click(x, y)
+        time.sleep(1) 
 
 if __name__ == '__main__':
     unittest.main()
