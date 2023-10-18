@@ -137,6 +137,7 @@ def start_game():
             return CampoMinado(nivel)
         else: 
             print("Nível de dificuldade inválido. Escolha 1, 2 ou 3.")
+        return None 
 
 def exibir_historico():
     try:

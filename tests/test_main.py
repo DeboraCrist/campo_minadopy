@@ -69,6 +69,21 @@ class TestCampoMinado(unittest.TestCase):
         with self.assertRaises(SystemExit):
             main()
 
+    @patch('builtins.input', side_effect=['1', 'N', 'H', 'Q'])
+    def test_main_exibir_historico_e_sair_nivel1(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
+
+    @patch('builtins.input', side_effect=['2', 'N', 'H', 'Q'])
+    def test_main_exibir_historico_e_sair_nivel2(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
+
+    @patch('builtins.input', side_effect=['3', 'N', 'H', 'Q'])
+    def test_main_exibir_historico_e_sair_nivel3(self, mock_input):
+        with self.assertRaises(SystemExit):
+            main()
+
     def test_interface_sair_do_jogo(self):
         with patch('builtins.input', side_effect=['Q']):
             with self.assertRaises(SystemExit):
@@ -153,6 +168,11 @@ class TestCampoMinado(unittest.TestCase):
         x, y = 200, 200  
         pyautogui.click(x, y)
         time.sleep(1) 
+
+    def test_iniciar_jogo_nivel_invalido(self):
+        with patch('builtins.input', side_effect=['4', '3']):
+            resultado = start_game()
+            self.assertIsNone(resultado)  
 
 if __name__ == '__main__':
     unittest.main()

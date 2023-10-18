@@ -509,6 +509,113 @@ class TestCampoMinadoGUI(unittest.TestCase):
             for botao in linha:
                 self.assertIn(botao.cget('bg'), {'light gray', '#d9d9d9'}, "A cor de fundo da célula deve ser 'light gray'")
     
+    def test_alternar_modo_bandeira(self):
+        initial_text = self.app.modo_bandeira_button.cget('text')
+        self.app.alternar_modo_bandeira()
+        new_text = self.app.modo_bandeira_button.cget('text')
+        self.assertNotEqual(initial_text, new_text)
+
+    def test_alternar_modo_bandeira_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        initial_text = app.modo_bandeira_button.cget('text')
+        app.alternar_modo_bandeira()
+        new_text = app.modo_bandeira_button.cget('text')
+        self.assertNotEqual(initial_text, new_text)
+
+    def test_alternar_modo_bandeira_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        initial_text = app.modo_bandeira_button.cget('text')
+        app.alternar_modo_bandeira()
+        new_text = app.modo_bandeira_button.cget('text')
+        self.assertNotEqual(initial_text, new_text)
+
+    def test_atualizar_num_bandeiras(self):
+        self.app.jogo.bandeiras_colocadas = 5
+        self.app.atualizar_num_bandeiras()
+        expected_text = f'Bandeiras: 5/{self.app.jogo.num_bombas}'
+        self.assertEqual(self.app.num_bandeiras_var.get(), expected_text)
+
+    def test_atualizar_num_bandeiras_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.app.jogo.bandeiras_colocadas = 5
+        self.app.atualizar_num_bandeiras()
+        expected_text = f'Bandeiras: 5/{self.app.jogo.num_bombas}'
+        self.assertEqual(self.app.num_bandeiras_var.get(), expected_text)
+
+    def test_atualizar_num_bandeiras_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.app.jogo.bandeiras_colocadas = 5
+        self.app.atualizar_num_bandeiras()
+        expected_text = f'Bandeiras: 5/{self.app.jogo.num_bombas}'
+        self.assertEqual(self.app.num_bandeiras_var.get(), expected_text)
+
+    def test_atualizar_num_bandeiras_initial_state(self):
+        expected_text = f'Bandeiras: 0/10'  
+        initial_text = self.app.num_bandeiras_var.get()
+        self.assertEqual(initial_text, expected_text)
+
+    def test_atualizar_num_bandeiras_initial_state_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        expected_text = f'Bandeiras: 0/30'  
+        initial_text = app.num_bandeiras_var.get()
+        self.assertEqual(initial_text, expected_text)
+
+    def test_atualizar_num_bandeiras_initial_state_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        expected_text = f'Bandeiras: 0/100'  
+        initial_text = app.num_bandeiras_var.get()
+        self.assertEqual(initial_text, expected_text)
+
+    def test_alternar_modo_bandeira_initia(self):
+        expected_text = "Modo Bandeira"
+        initial_text = self.app.modo_bandeira_button.cget('text')
+        self.assertEqual(initial_text, expected_text)
+
+    def test_alternar_modo_bandeira_initial_state_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        expected_text = "Modo Bandeira"
+        initial_text = app.modo_bandeira_button.cget('text')
+        self.assertEqual(initial_text, expected_text)
+
+    def test_alternar_modo_bandeira_initial_state_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        expected_text = "Modo Bandeira"
+        initial_text = app.modo_bandeira_button.cget('text')
+        self.assertEqual(initial_text, expected_text)
+
+    def test_reiniciar_jogo_pelafuncao(self):
+        self.app.reiniciar_jogo()
+
+    def test_reiniciar_jogo_pelafuncao_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.reiniciar_jogo()
+
+    def test_reiniciar_jogo_pelafuncao_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.reiniciar_jogo()
+
+    def test_tempo_initial_state(self):
+        self.assertEqual(self.app.tempo_var.get(), "00:00")
+
+    def test_tempo_initial_state_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.assertEqual(self.app.tempo_var.get(), "00:00")
+
+    def test_tempo_initial_state_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.assertEqual(self.app.tempo_var.get(), "00:00")
+
+    def test_mostrar_fim_de_jogo(self):
+        self.app.mostrar_fim_de_jogo("Parabéns! Você venceu!")
+        
+    def test_mostrar_fim_de_jogo_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.mostrar_fim_de_jogo("Parabéns! Você venceu!")
+
+    def test_mostrar_fim_de_jogo_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.mostrar_fim_de_jogo("Parabéns! Você venceu!")    
+
     def tearDown(self):
         self.root.destroy()
 
