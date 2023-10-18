@@ -27,6 +27,9 @@ class CampoMinado:
         if not self.bombas[x][y]:
             self.descobrir_vizinhanca(x, y)
             self.start_time = datetime.datetime.now()
+        else:
+            self.inicializar_tabuleiro()
+            self.realizar_primeira_jogada(x, y)
 
     def inicializar_tabuleiro(self):
         if self.nivel not in self.NIVEIS:
@@ -89,7 +92,7 @@ class CampoMinado:
             if not self.bombas[x][y]:
                 self.bombas[x][y] = True
                 bombas_restantes -= 1
-        
+                # print(f"Bomba colocada em ({x}, {y})") 
     
     def contar_bombas_adjacentes(self, x, y):
         count = 0

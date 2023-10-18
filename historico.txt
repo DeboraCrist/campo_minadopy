@@ -14,40 +14,10 @@ Pontuação: 0.00 segundos
 Parabéns! Você venceu!
 
 Pontuação: 0.00 segundos
-Parabéns! Você venceu!
-
-Pontuação: 0.00 segundos
-Parabéns! Você venceu!
-
-Pontuação: 8.00 segundos
-Parabéns! Você venceu!
-
-Pontuação: 2.00 segundos
 Você perdeu!
 
 Pontuação: 0.00 segundos
-Data e Hora: 2023-10-16 23:57:52.942009
-Nível: 1
-Resultado: Derrota
-
-
-Você perdeu!
-
-Pontuação: 3.00 segundos
-Data e Hora: 2023-10-16 23:58:25.911774
-Nível: 1
-Resultado: Derrota
-
-
-Você perdeu!
-
-Pontuação: 2.00 segundos
-Data e Hora: 2023-10-16 23:58:31.940696
-Nível: 1
-Resultado: Derrota
-
-
-Data e Hora: 2023-10-16 23:59:02.877962
+Data e Hora: 2023-10-18 00:16:13.888998
 Nível: 1
 Resultado: Derrota
 

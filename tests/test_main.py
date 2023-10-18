@@ -94,6 +94,14 @@ class TestCampoMinado(unittest.TestCase):
             output = mock_stdout.getvalue()
         self.assertNotEqual(output, "Nenhum histórico disponível.\n")
 
+    def test_coordenadas_validas(self):
+        jogo = CampoMinado(1)
+        try:
+            jogo.colocar_bandeira(0, 0)
+            jogo.remover_bandeira(5, 5)
+            jogo.realizar_primeira_jogada(3, 3)
+        except ValueError:
+            self.fail("Coordenadas válidas geraram exceção")
 
 if __name__ == '__main__':
     unittest.main()

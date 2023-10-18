@@ -56,7 +56,6 @@ class TestBomba(unittest.TestCase):
             jogo.inicializar_tabuleiro()
             jogo.colocar_bombas()
             bombas_encontradas_em_execucoes.append(jogo.bombas)
-
         for i in range(len(bombas_encontradas_em_execucoes) - 1):
             self.assertNotEqual(bombas_encontradas_em_execucoes[i], bombas_encontradas_em_execucoes[i + 1])
 
@@ -67,7 +66,6 @@ class TestBomba(unittest.TestCase):
             jogo.inicializar_tabuleiro()
             jogo.colocar_bombas()
             bombas_encontradas_em_execucoes.append(jogo.bombas)
-
         for i in range(len(bombas_encontradas_em_execucoes) - 1):
             self.assertNotEqual(bombas_encontradas_em_execucoes[i], bombas_encontradas_em_execucoes[i + 1])
 
@@ -163,5 +161,25 @@ class TestBomba(unittest.TestCase):
         self.jogo.descobrir_zona(0, 0)
         self.jogo.descobrir_zona(7, 7)
         self.assertTrue(self.jogo.jogo_encerrado)
+
+    def test_realizar_primeira_jogada_sem_bomba(self):
+        jogo = CampoMinado(1)
+        jogo.realizar_primeira_jogada(0, 0)
+
+    def test_realizar_primeira_jogada_com_bomba(self):
+        jogo = CampoMinado(1)
+        jogo.bombas[0][0] = True
+        jogo.realizar_primeira_jogada(0, 0)
+
+    def test_realocacao_de_bombas_apos_primeira_jogada(self):
+        jogo = CampoMinado(1)
+        jogo.bombas[0][0] = True
+        jogo.realizar_primeira_jogada(0, 0)
+        bombas_realocadas = 0
+        for x in range(jogo.linhas):
+            for y in range(jogo.colunas):
+                if jogo.bombas[x][y]:
+                    bombas_realocadas += 1
+        self.assertEqual(bombas_realocadas, jogo.num_bombas)
 if __name__ == '__main__':
     unittest.main()

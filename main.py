@@ -25,8 +25,24 @@ def main():
             elif acao == 'H':
                 exibir_historico()
             elif acao == 'D': 
-                x = int(input("Digite a coordenada X: "))
-                y = int(input("Digite a coordenada Y: "))
+                while True:
+                    try:
+                        x = input("Digite a coordenada X: ")
+                        if not x:
+                            raise ValueError("Coordenadas fora do intervalo válido. Digite valores dentro dos limites do tabuleiro.")
+                        x = int(x)
+                        y = input("Digite a coordenada Y: ")
+                        if not y:
+                            raise ValueError("Coordenadas fora do intervalo válido. Digite valores dentro dos limites do tabuleiro.")
+                        y = int(y)
+
+                        if not (0 <= x < len(jogo.tabuleiro) and 0 <= y < len(jogo.tabuleiro[0])):
+                            raise ValueError("Coordenadas fora do intervalo válido. Digite valores dentro dos limites do tabuleiro.")
+                        
+                        break
+                    except ValueError as e:
+                        print(e)
+
                 if primeira_jogada:
                     try:
                         jogo.realizar_primeira_jogada(x, y)
@@ -60,15 +76,45 @@ def main():
                     else:
                         return
             elif acao == 'B': 
-                x = int(input("Digite a coordenada X para colocar a bandeira: "))
-                y = int(input("Digite a coordenada Y para colocar a bandeira: "))
+                while True:
+                    try:
+                        x = input("Digite a coordenada X para colocar a bandeira: ")
+                        if not x:
+                            raise ValueError("Coordenadas fora do intervalo válido. Digite valores dentro dos limites do tabuleiro.")
+                        x = int(x)
+                        y = input("Digite a coordenada Y para colocar a bandeira: ")
+                        if not y:
+                            raise ValueError("Coordenadas fora do intervalo válido. Digite valores dentro dos limites do tabuleiro.")
+                        y = int(y)
+
+                        if not (0 <= x < len(jogo.tabuleiro) and 0 <= y < len(jogo.tabuleiro[0])):
+                            raise ValueError("Coordenadas fora do intervalo válido. Digite valores dentro dos limites do tabuleiro.")
+                        
+                        break
+                    except ValueError as e:
+                        print(e)
                 try:
                     jogo.colocar_bandeira(x, y)
                 except ValueError as e:
                     print(e)
             elif acao == 'R':
-                x = int(input("Digite a coordenada X para remover a bandeira: "))
-                y = int(input("Digite a coordenada Y para remover a bandeira: "))
+                while True:
+                    try:
+                        x = input("Digite a coordenada X para remover a bandeira: ")
+                        if not x:
+                            raise ValueError("Coordenadas fora do intervalo válido. Digite valores dentro dos limites do tabuleiro.")
+                        x = int(x)
+                        y = input("Digite a coordenada Y para remover a bandeira: ")
+                        if not y:
+                            raise ValueError("Coordenadas fora do intervalo válido. Digite valores dentro dos limites do tabuleiro.")
+                        y = int(y)
+
+                        if not (0 <= x < len(jogo.tabuleiro) and 0 <= y < len(jogo.tabuleiro[0])):
+                            raise ValueError("Coordenadas fora do intervalo válido. Digite valores dentro dos limites do tabuleiro.")
+                        
+                        break
+                    except ValueError as e:
+                        print(e)
                 jogo.remover_bandeira(x, y)
             else: 
                 print("Ação inválida. Escolha D para descobrir, B para colocar bandeira, R para remover bandeira, H para histórico, N para reiniciar ou Q para sair.")

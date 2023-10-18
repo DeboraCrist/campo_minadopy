@@ -10,20 +10,23 @@ class JogoCampoMinadoGUI:
         self.master = master
         self.master.title("Campo Minado")
         self.nivel_var = tk.StringVar(value="1")
+        self.master.geometry("400x270") 
         self.mostrar_tela_niveis()
 
     def mostrar_tela_niveis(self):
-        nivel_label = ttk.Label(self.master, text="Escolha o nível de dificuldade:", font=("Arial", 13))
-        nivel_label.pack(pady=10)
+        nivel_label = ttk.Label(self.master, text="Escolha o nível:", font=("Arial", 15))
+        nivel_label.pack(pady=20)
         niveis = ["Fácil (8x8 - 10 bombas)", "Intermediário (10x16 - 30 bombas)", "Difícil (24x24 - 100 bombas)"]
         for i, nivel in enumerate(niveis, start=1):
             nivel_radio = ttk.Radiobutton(self.master, text=nivel, variable=self.nivel_var, value=str(i))
             nivel_radio.pack(pady=5)
 
-        iniciar_button = ttk.Button(self.master, text="Iniciar Jogo", command=self.iniciar_jogo)
+        iniciar_button = ttk.Button(self.master, text="Iniciar Jogo", command=self.iniciar_jogo, style='HistButton.TButton')
         iniciar_button.pack(pady=10)
+        style = ttk.Style()
+        style.configure('HistButton.TButton', background='#415ce1')
         historico_button = ttk.Button(self.master, text="Histórico", command=self.exibir_historico)
-        historico_button.pack(pady=10)
+        historico_button.pack(side="top", anchor="ne", padx=10, pady=10)
 
     def exibir_historico(self):
         try:
@@ -63,16 +66,17 @@ class JogoCampoMinadoTabuleiro:
         self.nivel = nivel
         self.jogo = CampoMinado(nivel)
         self.modo_bandeira = False
-        self.criar_tabuleiro()
+        self.criar_tabuleiro() 
         self.primeira_jogada = True
         self.elapsed_time = 0 
+        
 
     def criar_tabuleiro(self):
         self.botoes = []
         for i in range(self.jogo.linhas):
             linha = []
             for j in range(self.jogo.colunas):
-                botao = tk.Button(self.master, text='', width=1, height=1, command=lambda x=i, y=j: self.clicar_celula(x, y), font=("Arial", 8))
+                botao = tk.Button(self.master, text='', width=1, height=1, command=lambda x=i, y=j: self.clicar_celula(x, y), font=("Arial", 7))
                 botao.grid(row=i, column=j)
                 linha.append(botao)
             self.botoes.append(linha)
@@ -92,13 +96,13 @@ class JogoCampoMinadoTabuleiro:
         self.modo_bandeira_button.grid(row=0, column=2)
 
         self.num_bandeiras_var = tk.StringVar()
-        num_bandeiras_label = ttk.Label(self.master, textvariable=self.num_bandeiras_var, font=("Arial", 12))
+        num_bandeiras_label = ttk.Label(self.master, textvariable=self.num_bandeiras_var, font=("Arial", 11))
         num_bandeiras_label.grid(row=self.jogo.linhas + 1, columnspan=self.jogo.colunas)
         self.atualizar_num_bandeiras()
         self.num_bandeiras_label = num_bandeiras_label
 
         self.tempo_var = tk.StringVar(value="00:00")
-        self.tempo_label = ttk.Label(self.master, textvariable=self.tempo_var, font=("Arial", 12))
+        self.tempo_label = ttk.Label(self.master, textvariable=self.tempo_var, font=("Arial", 11))
         self.tempo_label.grid(row=self.jogo.linhas + 2, columnspan=self.jogo.colunas)
         
         self.start_time = None
@@ -112,13 +116,13 @@ class JogoCampoMinadoTabuleiro:
             minutes = self.elapsed_time // 60
             seconds = self.elapsed_time % 60
             self.tempo_var.set(f"{minutes:02d}:{seconds:02d}")
-            self.jogo.end_time = datetime.datetime.now()  # Store the end time
+            self.jogo.end_time = datetime.datetime.now() 
             self.master.after(1000, self.update_timer)
 
     def stop_timer(self):
         if self.start_time:
             self.elapsed_time = int(time.time() - self.start_time)
-            self.start_time = None  # Stop the timer
+            self.start_time = None  
 
     def clicar_celula(self, x, y):
         if not self.jogo.jogo_encerrado:
@@ -168,7 +172,7 @@ class JogoCampoMinadoTabuleiro:
                 elif celula == 'B':
                     botao.config(text='B', state="disabled", relief="sunken", bg="red")
                 else:
-                    botao.config(text=celula, state="disabled", relief="raised", bg="light gray")
+                    botao.config(text=celula, state="disabled", relief="raised", bg="white") 
 
     def alternar_modo_bandeira(self):
         self.modo_bandeira = not self.modo_bandeira
@@ -190,6 +194,8 @@ class JogoCampoMinadoTabuleiro:
         for i in range(self.jogo.linhas):
             for j in range(self.jogo.colunas):
                 self.botoes[i][j].config(text='')
+
+        self.update_timer()  
 
     def sair_jogo(self):
         self.jogo.sair()
