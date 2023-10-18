@@ -14,10 +14,40 @@ class TestCampoMinadoPrint(unittest.TestCase):
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Saindo do jogo.")
 
+    def test_sair_imprime_mensagem_de_saindo_nivel2(self):
+        jogo = CampoMinado(2) 
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            jogo.sair()
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Saindo do jogo.")
+
+    def test_sair_imprime_mensagem_de_saindo_nivel3(self):
+        jogo = CampoMinado(3) 
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            jogo.sair()
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Saindo do jogo.")
+
     def test_descobrir_zona_com_bandeira_print(self):
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             self.jogo.colocar_bandeira(1, 1)  
             self.jogo.descobrir_zona(1, 1) 
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Ação inválida. Você deve remover a bandeira antes de descobrir a zona.")
+
+    def test_descobrir_zona_com_bandeira_print_nivel2(self):
+        jogo = CampoMinado(2)
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            jogo.colocar_bandeira(1, 1)  
+            jogo.descobrir_zona(1, 1) 
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Ação inválida. Você deve remover a bandeira antes de descobrir a zona.")
+
+    def test_descobrir_zona_com_bandeira_print_nivel3(self):
+        jogo = CampoMinado(3)
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            jogo.colocar_bandeira(1, 1)  
+            jogo.descobrir_zona(1, 1) 
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Ação inválida. Você deve remover a bandeira antes de descobrir a zona.")
 
@@ -44,9 +74,39 @@ class TestCampoMinadoPrint(unittest.TestCase):
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.")
 
+    def teste_bandeira_em_bomba_invalida_print_nivel2(self):
+        jogo = CampoMinado(2)
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            jogo.realizar_primeira_jogada(0, 0) 
+            jogo.colocar_bandeira(0, 0)  
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.")
+
+    def teste_bandeira_em_bomba_invalida_print_nivel3(self):
+        jogo = CampoMinado(3)
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            jogo.realizar_primeira_jogada(0, 0) 
+            jogo.colocar_bandeira(0, 0)  
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Ação inválida. Você não pode colocar uma bandeira em uma zona já revelada.")
+
     def teste_bandeira_fora_do_tabuleiro_invalida_print(self):
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             self.jogo.colocar_bandeira(self.jogo.linhas + 1, self.jogo.colunas + 1)  
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Posição fora do tabuleiro.")
+
+    def teste_bandeira_fora_do_tabuleiro_invalida_print_nivel2(self):
+        jogo = CampoMinado(2)
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            jogo.colocar_bandeira(jogo.linhas + 1, jogo.colunas + 1)  
+            output = mock_stdout.getvalue().strip()
+            self.assertEqual(output, "Posição fora do tabuleiro.")
+
+    def teste_bandeira_fora_do_tabuleiro_invalida_print_nivel3(self):
+        jogo = CampoMinado(3)
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            jogo.colocar_bandeira(jogo.linhas + 1, jogo.colunas + 1)  
             output = mock_stdout.getvalue().strip()
             self.assertEqual(output, "Posição fora do tabuleiro.")
 

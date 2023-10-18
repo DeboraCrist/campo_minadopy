@@ -103,6 +103,24 @@ class TestCampoMinado(unittest.TestCase):
         except ValueError:
             self.fail("Coordenadas válidas geraram exceção")
 
+    def test_coordenadas_validas_nivel2(self):
+        jogo = CampoMinado(2)
+        try:
+            jogo.colocar_bandeira(0, 0)
+            jogo.remover_bandeira(5, 5)
+            jogo.realizar_primeira_jogada(3, 3)
+        except ValueError:
+            self.fail("Coordenadas válidas geraram exceção")
+
+    def test_coordenadas_validas_nivel3(self):
+        jogo = CampoMinado(3)
+        try:
+            jogo.colocar_bandeira(0, 0)
+            jogo.remover_bandeira(5, 5)
+            jogo.realizar_primeira_jogada(3, 3)
+        except ValueError:
+            self.fail("Coordenadas válidas geraram exceção")
+
 if __name__ == '__main__':
     unittest.main()
 

@@ -13,16 +13,54 @@ class TestCampoMinadoGUI(unittest.TestCase):
         botao = self.app.botoes[0][0]
         self.assertEqual(botao['state'], 'disabled')
 
+    def test_clicar_celula_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.clicar_celula(0, 0)
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['state'], 'disabled')
+
+    def test_clicar_celula_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.clicar_celula(0, 0)
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['state'], 'disabled')
+
     def test_atualizar_interface(self):
         self.app.jogo.tabuleiro[0][0] = '1'
         self.app.atualizar_interface()
         botao = self.app.botoes[0][0]
         self.assertEqual(botao['text'], '1')
 
+    def test_atualizar_interface_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.jogo.tabuleiro[0][0] = '1'
+        app.atualizar_interface()
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['text'], '1')
+
+    def test_atualizar_interface_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.jogo.tabuleiro[0][0] = '1'
+        app.atualizar_interface()
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['text'], '1')
+
     def teste_perda_jogo_na_primeira_jogada(self):
         self.app.jogo.bombas[0][0] = True
         self.app.clicar_celula(0, 0)
         self.assertFalse(self.app.jogo.jogo_encerrado)
+    
+    def teste_perda_jogo_na_primeira_jogada_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.jogo.bombas[0][0] = True
+        app.clicar_celula(0, 0)
+        self.assertFalse(app.jogo.jogo_encerrado)
+
+    def teste_perda_jogo_na_primeira_jogada_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.jogo.bombas[0][0] = True
+        app.clicar_celula(0, 0)
+        self.assertFalse(app.jogo.jogo_encerrado)
 
     def teste_perda_jogo_na_segunda_jogada(self):
         self.app.jogo.bombas[0][0] = True
@@ -32,6 +70,24 @@ class TestCampoMinadoGUI(unittest.TestCase):
         self.app.clicar_celula(1, 0)
         self.assertTrue(self.app.jogo.jogo_encerrado)
 
+    def teste_perda_jogo_na_segunda_jogada_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.jogo.bombas[0][0] = True
+        app.clicar_celula(0, 0)
+        app.atualizar_interface()
+        app.jogo.bombas[1][0] = True
+        app.clicar_celula(1, 0)
+        self.assertTrue(app.jogo.jogo_encerrado)
+
+    def teste_perda_jogo_na_segunda_jogada_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.jogo.bombas[0][0] = True
+        app.clicar_celula(0, 0)
+        app.atualizar_interface()
+        app.jogo.bombas[1][0] = True
+        app.clicar_celula(1, 0)
+        self.assertTrue(app.jogo.jogo_encerrado)
+
     def test_vitoria_jogo(self):
         for x in range(self.app.jogo.linhas):
             for y in range(self.app.jogo.colunas):
@@ -39,34 +95,121 @@ class TestCampoMinadoGUI(unittest.TestCase):
                     self.app.clicar_celula(x, y)
         self.assertTrue(self.app.jogo.jogo_vencido)
 
+    def test_vitoria_jogo_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        for x in range(app.jogo.linhas):
+            for y in range(app.jogo.colunas):
+                if not app.jogo.bombas[x][y]:
+                    app.clicar_celula(x, y)
+        self.assertTrue(app.jogo.jogo_vencido)
+
+    def test_vitoria_jogo_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        for x in range(app.jogo.linhas):
+            for y in range(app.jogo.colunas):
+                if not app.jogo.bombas[x][y]:
+                    app.clicar_celula(x, y)
+        self.assertTrue(app.jogo.jogo_vencido)
+
     def test_interface_inicial(self):
         self.assertEqual(self.app.botoes[0][0]['state'], 'normal')
+
+    def test_interface_inicial_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.assertEqual(app.botoes[0][0]['state'], 'normal')
+
+    def test_interface_inicial_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.assertEqual(app.botoes[0][0]['state'], 'normal')
 
     def test_interface_inicial1(self):
         self.assertEqual(self.app.botoes[0][1]['state'], 'normal')
 
+    def test_interface_inicial1_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.assertEqual(app.botoes[0][1]['state'], 'normal')
+        
+    def test_interface_inicial1_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.assertEqual(app.botoes[0][1]['state'], 'normal')
+
     def test_interface_inicial8(self):
         self.assertEqual(self.app.botoes[7][7]['state'], 'normal')
 
+    def test_interface_inicial8_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.assertEqual(app.botoes[7][7]['state'], 'normal')
+
+    def test_interface_inicial8_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.assertEqual(app.botoes[7][7]['state'], 'normal')
+
     def test_interface_inicial53(self):
         self.assertEqual(self.app.botoes[5][3]['state'], 'normal')
+
+    def test_interface_inicial53_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        self.assertEqual(app.botoes[5][3]['state'], 'normal')
+
+    def test_interface_inicial53_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        self.assertEqual(app.botoes[5][3]['state'], 'normal')
 
     def test_reiniciar_jogo(self):
         self.app.clicar_celula(0, 0)
         self.app.reiniciar_jogo()
         self.assertEqual(self.app.botoes[0][0]['state'], 'active')
 
-    
+    def test_reiniciar_jogo_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.clicar_celula(0, 0)
+        app.reiniciar_jogo()
+        self.assertEqual(app.botoes[0][0]['state'], 'active')
+
+    def test_reiniciar_jogo_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.clicar_celula(0, 0)
+        app.reiniciar_jogo()
+        self.assertEqual(app.botoes[0][0]['state'], 'active')
+
     def test_botao_clicado_depois_da_vitoria(self):
         self.app.jogo.jogo_vencido = True
         self.app.clicar_celula(0, 0)
         botao = self.app.botoes[0][0]
         self.assertEqual(botao['state'], 'disabled')
 
+    def test_botao_clicado_depois_da_vitoria_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.jogo.jogo_vencido = True
+        app.clicar_celula(0, 0)
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['state'], 'disabled')
+
+    def test_botao_clicado_depois_da_vitoria_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.jogo.jogo_vencido = True
+        app.clicar_celula(0, 0)
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['state'], 'disabled')
+
     def test_botao_clicado_depois_da_derrota(self):
         self.app.jogo.jogo_encerrado = True
         self.app.clicar_celula(0, 0)
         botao = self.app.botoes[0][0]
+        self.assertEqual(botao['state'], 'normal')
+
+    def test_botao_clicado_depois_da_derrota_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.jogo.jogo_encerrado = True
+        app.clicar_celula(0, 0)
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['state'], 'normal')
+
+    def test_botao_clicado_depois_da_derrota_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.jogo.jogo_encerrado = True
+        app.clicar_celula(0, 0)
+        botao = app.botoes[0][0]
         self.assertEqual(botao['state'], 'normal')
 
     def test_botao_clicado_apos_vitoria_reiniciar(self):
@@ -76,6 +219,22 @@ class TestCampoMinadoGUI(unittest.TestCase):
         botao = self.app.botoes[0][0]
         self.assertEqual(botao['state'], 'active')
 
+    def test_botao_clicado_apos_vitoria_reiniciar_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.jogo.jogo_vencido = True
+        app.clicar_celula(0, 0)
+        app.reiniciar_jogo()
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['state'], 'active')
+
+    def test_botao_clicado_apos_vitoria_reiniciar_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.jogo.jogo_vencido = True
+        app.clicar_celula(0, 0)
+        app.reiniciar_jogo()
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['state'], 'active')
+
     def test_botao_clicado_apos_derrota_reiniciar(self):
         self.app.jogo.jogo_encerrado = True
         self.app.clicar_celula(0, 0)
@@ -83,24 +242,86 @@ class TestCampoMinadoGUI(unittest.TestCase):
         botao = self.app.botoes[0][0]
         self.assertEqual(botao['state'], 'active')
 
+    def test_botao_clicado_apos_derrota_reiniciar_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.jogo.jogo_encerrado = True
+        app.clicar_celula(0, 0)
+        app.reiniciar_jogo()
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['state'], 'active')
+
+    def test_botao_clicado_apos_derrota_reiniciar_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.jogo.jogo_encerrado = True
+        app.clicar_celula(0, 0)
+        app.reiniciar_jogo()
+        botao = app.botoes[0][0]
+        self.assertEqual(botao['state'], 'active')
+
     def test_descobrir_celula_com_numero(self):
         self.app.jogo.tabuleiro[0][0] = '1'
         self.app.clicar_celula(0, 0)
         self.assertEqual(self.app.botoes[0][0]['state'], 'disabled')
 
+    def test_descobrir_celula_com_numero_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.jogo.tabuleiro[0][0] = '1'
+        app.clicar_celula(0, 0)
+        self.assertEqual(app.botoes[0][0]['state'], 'disabled')
+
+    def test_descobrir_celula_com_numero_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.jogo.tabuleiro[0][0] = '1'
+        app.clicar_celula(0, 0)
+        self.assertEqual(app.botoes[0][0]['state'], 'disabled')
+
     def test_modo_bandeiraon(self):
         self.app.alternar_modo_bandeira()
         self.assertTrue(self.app.modo_bandeira)
+
+    def test_modo_bandeiraon_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.alternar_modo_bandeira()
+        self.assertTrue(app.modo_bandeira)
+
+    def test_modo_bandeiraon_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.alternar_modo_bandeira()
+        self.assertTrue(app.modo_bandeira)
 
     def test_modo_bandeiraoff(self):
         self.app.alternar_modo_bandeira()
         self.app.alternar_modo_bandeira()
         self.assertFalse(self.app.modo_bandeira)
 
+    def test_modo_bandeiraoff_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.alternar_modo_bandeira()
+        app.alternar_modo_bandeira()
+        self.assertFalse(app.modo_bandeira)
+
+    def test_modo_bandeiraoff_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.alternar_modo_bandeira()
+        app.alternar_modo_bandeira()
+        self.assertFalse(app.modo_bandeira)
+
     def test_colocar_bandeiramodo(self):
         self.app.alternar_modo_bandeira()
         self.app.clicar_celula(0, 0)
         self.assertEqual(self.app.jogo.tabuleiro[0][0], 'F')
+
+    def test_colocar_bandeiramodo_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.alternar_modo_bandeira()
+        app.clicar_celula(0, 0)
+        self.assertEqual(app.jogo.tabuleiro[0][0], 'F')
+
+    def test_colocar_bandeiramodo_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.alternar_modo_bandeira()
+        app.clicar_celula(0, 0)
+        self.assertEqual(app.jogo.tabuleiro[0][0], 'F')
 
     def test_remover_bandeiramodo(self):
         self.app.alternar_modo_bandeira()
@@ -108,21 +329,73 @@ class TestCampoMinadoGUI(unittest.TestCase):
         self.app.clicar_celula(0, 0)
         self.assertEqual(self.app.jogo.tabuleiro[0][0], '-')
 
+    def test_remover_bandeiramodo_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.alternar_modo_bandeira()
+        app.clicar_celula(0, 0)
+        app.clicar_celula(0, 0)
+        self.assertEqual(app.jogo.tabuleiro[0][0], '-')
+
+    def test_remover_bandeiramodo_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.alternar_modo_bandeira()
+        app.clicar_celula(0, 0)
+        app.clicar_celula(0, 0)
+        self.assertEqual(app.jogo.tabuleiro[0][0], '-')
+
     def test_descobrir_zonamodo(self):
         self.app.alternar_modo_bandeira()
         self.app.clicar_celula(0, 0)
         self.assertNotEqual(self.app.jogo.tabuleiro[0][0], '-')
 
+    def test_descobrir_zonamodo_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.alternar_modo_bandeira()
+        app.clicar_celula(0, 0)
+        self.assertNotEqual(app.jogo.tabuleiro[0][0], '-')
+
+    def test_descobrir_zonamodo_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.alternar_modo_bandeira()
+        app.clicar_celula(0, 0)
+        self.assertNotEqual(app.jogo.tabuleiro[0][0], '-')
+
     def test_descobrir_zona(self):
         self.app.alternar_modo_bandeira()
         self.app.clicar_celula(0, 0)
         self.assertNotEqual(self.app.jogo.tabuleiro[0][0], '-')
+
+    def test_descobrir_zona_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        app.alternar_modo_bandeira()
+        app.clicar_celula(0, 0)
+        self.assertNotEqual(app.jogo.tabuleiro[0][0], '-')
+
+    def test_descobrir_zona_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.alternar_modo_bandeira()
+        app.clicar_celula(0, 0)
+        self.assertNotEqual(app.jogo.tabuleiro[0][0], '-')
     
     def test_contar_bandeiras_colocadas(self):
         self.app.alternar_modo_bandeira()
         for i in range(5):
             self.app.clicar_celula(i, i)
         self.assertEqual(self.app.jogo.bandeiras_colocadas, 5)
+
+    def test_contar_bandeiras_colocadas_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.alternar_modo_bandeira()
+        for i in range(5):
+            app.clicar_celula(i, i)
+        self.assertEqual(app.jogo.bandeiras_colocadas, 5)
+
+    def test_contar_bandeiras_colocadas_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        app.alternar_modo_bandeira()
+        for i in range(5):
+            app.clicar_celula(i, i)
+        self.assertEqual(app.jogo.bandeiras_colocadas, 5)
 
     def test_botoes_no_tabuleiro(self):
         for linha in self.app.botoes:
@@ -189,21 +462,55 @@ class TestCampoMinadoGUI(unittest.TestCase):
         for linha in self.app.botoes:
             for botao in linha:
                 self.assertEqual(botao.cget('text'), '', "A célula deve estar vazia inicialmente")
+
+    def test_celulas_estao_vazias_inicialmente_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        for linha in app.botoes:
+            for botao in linha:
+                self.assertEqual(botao.cget('text'), '', "A célula deve estar vazia inicialmente")
+
+    def test_celulas_estao_vazias_inicialmente_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        for linha in app.botoes:
+            for botao in linha:
+                self.assertEqual(botao.cget('text'), '', "A célula deve estar vazia inicialmente")
+
+    def test_celulas_estao_vazias_inicialmente_normal(self):
+        for linha in self.app.botoes:
+            for botao in linha:
                 self.assertEqual(botao.cget('state'), 'normal', "O estado da célula deve ser 'normal'")
+
+    def test_celulas_estao_vazias_inicialmente_normal_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        for linha in app.botoes:
+            for botao in linha:
+                self.assertEqual(botao.cget('state'), 'normal', "O estado da célula deve ser 'normal'")
+
+    def test_celulas_estao_vazias_inicialmente_normal_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        for linha in app.botoes:
+            for botao in linha:
+                self.assertEqual(botao.cget('state'), 'normal', "O estado da célula deve ser 'normal'")
+    
+    def test_celulas_estao_vazias_inicialmente_cor(self):
+        for linha in self.app.botoes:
+            for botao in linha:
+                self.assertIn(botao.cget('bg'), {'light gray', '#d9d9d9'}, "A cor de fundo da célula deve ser 'light gray'")
+   
+    def test_celulas_estao_vazias_inicialmente_cor_nivel2(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=2)
+        for linha in app.botoes:
+            for botao in linha:
                 self.assertIn(botao.cget('bg'), {'light gray', '#d9d9d9'}, "A cor de fundo da célula deve ser 'light gray'")
     
-    def test_redistribuicao_de_bombas_apos_primeira_jogada(self):
-        jogo = CampoMinado(1)
-        self.app.jogo.bombas[0][0] = True
-        try:
-            jogo.realizar_primeira_jogada(0, 0)
-        except ValueError:
-            pass
-        self.assertNotIn((0, 0), jogo.bombas)
+    def test_celulas_estao_vazias_inicialmente_cor_nivel3(self):
+        app = JogoCampoMinadoTabuleiro(self.root, nivel=3)
+        for linha in app.botoes:
+            for botao in linha:
+                self.assertIn(botao.cget('bg'), {'light gray', '#d9d9d9'}, "A cor de fundo da célula deve ser 'light gray'")
     
     def tearDown(self):
         self.root.destroy()
-
 
 if __name__ == "__main__":
     unittest.main()

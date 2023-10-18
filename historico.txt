@@ -5,9 +5,57 @@ Pontuação: 2.00 segundos
 Test game result
 
 Pontuação: 2.00 segundos
+Test game result
+
+Pontuação: 2.00 segundos
+Test game result
+
+Pontuação: 2.00 segundos
+Test game result
+
+Pontuação: 2.00 segundos
+Test game result
+
+Pontuação: 2.00 segundos
 Parabéns! Você venceu!
 
 Pontuação: 0.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 6.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 1.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 0.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 2.00 segundos
+Parabéns! Você venceu!
+
+Pontuação: 1.00 segundos
 Parabéns! Você venceu!
 
 Pontuação: 0.00 segundos
@@ -17,8 +65,24 @@ Pontuação: 0.00 segundos
 Você perdeu!
 
 Pontuação: 0.00 segundos
-Data e Hora: 2023-10-18 00:16:13.888998
+Data e Hora: 2023-10-18 03:34:57.148886
 Nível: 1
+Resultado: Derrota
+
+
+Você perdeu!
+
+Pontuação: 0.00 segundos
+Data e Hora: 2023-10-18 03:35:07.728068
+Nível: 3
+Resultado: Derrota
+
+
+Você perdeu!
+
+Pontuação: 0.00 segundos
+Data e Hora: 2023-10-18 03:36:08.035930
+Nível: 2
 Resultado: Derrota
 
 
