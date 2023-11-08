@@ -1,17 +1,1 @@
 Sample history
-Você perdeu!
-
-Pontuação: 0.00 segundos
-Data e Hora: 2023-10-18 13:35:29.623821
-Nível: 2
-Resultado: Derrota
-
-
-Você perdeu!
-
-Pontuação: 0.00 segundos
-Data e Hora: 2023-10-18 13:36:15.886816
-Nível: 3
-Resultado: Derrota
-
-
